@@ -49,7 +49,7 @@ class StartHomePage extends StatelessWidget {
                             width: double.infinity,
                             decoration: BoxDecoration(
                               image: DecorationImage(
-                                image: AssetImage('assets/logo1.png')
+                                image: AssetImage('Assets/img/logo1.png')
                               )
                             )
                           ),

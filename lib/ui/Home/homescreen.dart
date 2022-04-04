@@ -65,6 +65,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
   @override
   Widget build(BuildContext context) {
+    bool isLight = true;
     final size =  MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
@@ -151,7 +152,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
          */
       ),
-      drawer:DrawerScreen(),
+      drawer:
+      DrawerScreen(),
       body: Stack(
         children: [Container(
           decoration: BoxDecoration(

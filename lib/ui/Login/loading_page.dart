@@ -78,7 +78,7 @@ class _LoadingPageState extends State<LoadingPage> with TickerProviderStateMixin
                   animation: _animationController,
                   builder: (_, child) => Transform.scale(
                     scale: _animation.value,
-                    child: Image.asset('assets/logo1.png'),
+                    child: Image.asset('Assets/img/logo1.png'),
                   ),
                 ),
                 const SizedBox(height: 10.0),

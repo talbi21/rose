@@ -21,7 +21,7 @@ class PolicyDialog extends StatelessWidget {
           Expanded(
             child: FutureBuilder(
               future: Future.delayed(Duration(milliseconds: 150)).then((value) {
-                return rootBundle.loadString('assets/$mdFileName');
+                return rootBundle.loadString('Assets/licence/$mdFileName');
               }),
               builder: (context, snapshot) {
                 if (snapshot.hasData) {

@@ -35,14 +35,17 @@ class TextFormFrave extends StatelessWidget {
         contentPadding: EdgeInsets.symmetric(horizontal: 15, vertical: 15.0),
         filled: true,
         fillColor:Theme.of(context).brightness == Brightness.light
-            ? Colors.grey
+            ? Colors.white70
             : Color(0xFF2A2B2E) ,
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(100), borderSide: BorderSide(color: Color(0xffF5F5F5))),
         enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(100), borderSide: BorderSide(color: Color(0xFF2A2B2E))),
         hintText: hintText,
+
         prefixIcon: prefixIcon,
           hintStyle: TextStyle(
-            color: Colors.white24
+            color: Theme.of(context).brightness == Brightness.light
+                ? Colors.black26
+                : Colors.grey
 
       )
       ),

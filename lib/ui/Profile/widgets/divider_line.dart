@@ -12,8 +12,10 @@ class DividerLine extends StatelessWidget {
       padding: EdgeInsets.only(left: 65.0, right: 25.0),
       child: Container(
         height: 1,
-        width: size.width,
-        color: Colors.grey[300],
+        width: size.width-10,
+        color: Theme.of(context).brightness == Brightness.light
+            ? Color.fromRGBO(20,21,23, 1)
+            : Colors.white,
       ),
     );
   }

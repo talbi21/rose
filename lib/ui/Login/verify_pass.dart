@@ -91,7 +91,7 @@ class _PinCodeVerificationScreenState extends State<PinCodeVerificationScreen> {
 
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 20),
-                child: Image.asset("assets/verifym.png",
+                child: Image.asset("Assets/img/verifym.png",
                   height: 150,
                   width: 150,
                 ),
@@ -107,7 +107,7 @@ class _PinCodeVerificationScreenState extends State<PinCodeVerificationScreen> {
               ),
               Padding(
                 padding:
-                    const EdgeInsets.symmetric(horizontal: 30.0, vertical: 8),
+                    const EdgeInsets.symmetric(horizontal: 30.0, vertical:20),
                 child: RichText(
                   text: TextSpan(
                       text: "Enter the code sent to ",
@@ -116,12 +116,14 @@ class _PinCodeVerificationScreenState extends State<PinCodeVerificationScreen> {
                             text: "${widget.phoneNumber}",
                             style:  TextStyle(
                                 color: Theme.of(context).brightness == Brightness.light
-                                    ? Colors.black
+                                    ? Colors.blue
                                     : Colors.lightBlue,
                                 fontWeight: FontWeight.bold,
                                 fontSize: 17)),
                       ],
-                      style:const TextStyle(color: Colors.black54, fontSize: 22)),
+                      style: TextStyle(color:  Theme.of(context).brightness == Brightness.light
+                          ? Colors.black
+                          : Colors.grey, fontSize: 22)),
                   textAlign: TextAlign.center,
                 ),
               ),
@@ -169,7 +171,7 @@ class _PinCodeVerificationScreenState extends State<PinCodeVerificationScreen> {
                         borderRadius: BorderRadius.circular(5),
                         fieldHeight: 50,
                         fieldWidth: 40,
-                        activeFillColor: Colors.white,
+                        activeFillColor: Colors.transparent,
                       ),
                       cursorColor: Colors.black,
                       animationDuration: const Duration(milliseconds: 300),
@@ -294,7 +296,11 @@ color: Theme.of(context).brightness == Brightness.light
                 children: <Widget>[
                   Flexible(
                       child: TextButton(
-                    child:const Text("Clear"),
+                    child: Text("Clear",style: TextStyle(
+                      color:  Theme.of(context).brightness == Brightness.light
+                          ? Colors.black
+                          : Colors.lightBlue
+                    )),
                     onPressed: () {
                       textEditingController.clear();
                     },

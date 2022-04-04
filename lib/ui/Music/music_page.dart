@@ -45,16 +45,7 @@ class _Music_PageState extends State<Music_Page> {
 
           MusicScreen(),
 
-          Positioned(
-            bottom: 0,
-            child: Container(
-                width: size.width,
-                child: Align(
-                    alignment: Alignment.center,
-                    child: BottomNavigationFrave(index: 1)
-                )
-            ),
-          ),
+
 
 
         ],

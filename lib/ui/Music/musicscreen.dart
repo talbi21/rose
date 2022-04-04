@@ -24,6 +24,7 @@ class _MusicScreenState extends State<MusicScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        elevation: 0,
         backgroundColor: Theme.of(context).brightness == Brightness.light
             ? Colors.white
             : Color.fromRGBO(20,21,23, 1),

@@ -40,23 +40,30 @@ class ProfilePage extends StatelessWidget {
         }
       },
       child: Scaffold(
-        backgroundColor: Color(0xffF5F5F5),
+        backgroundColor: Theme.of(context).brightness == Brightness.light
+            ? Colors.white
+            : Color.fromRGBO(20,21,23, 1),
         appBar: AppBar(
+          elevation: 0,
+          backgroundColor:Theme.of(context).brightness == Brightness.light
+              ? Colors.white
+              : Color.fromRGBO(20,21,23, 1),
           automaticallyImplyLeading: true,
-          leading: IconButton(icon: Icon(Icons.arrow_back_ios),
+          leading: IconButton(icon: Icon(Icons.arrow_back_ios,color: Theme.of(context).brightness == Brightness.light
+              ? Color.fromRGBO(20,21,23, 1)
+              : Colors.white,),
             onPressed: () {Navigator.of(context).pop(); }
              // onPressed: () { Navigator.pop(context, false);}
         ),
         ),
-        body: Scaffold(
-          body:
+        body: ListProfile(),
     
-            ListProfile(),
-            
 
             
 
-        ),
+            
+
+
        ),
     );
   }
@@ -106,6 +113,7 @@ class _ListProfileState extends State<ListProfile> {
     final size = MediaQuery.of(context).size;
     
     return ListView(
+
       controller: _scrollController,
 
       children: [
@@ -118,35 +126,23 @@ class _ListProfileState extends State<ListProfile> {
         ),
 
         Container(
-          height: 121,
+          height: 60,
           width: size.width,
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: Theme.of(context).brightness == Brightness.light
+    ? Color.fromRGBO(20,21,23, 1)
+        : Colors.white,
             borderRadius: BorderRadius.circular(30.0)
           ),
           child: Column(
             children: [
               CardItemProfile(
-                text: 'Personal Information',
-                borderRadius: BorderRadius.only(topLeft: Radius.circular(30), topRight: Radius.circular(30.0)),
+                text: 'Admin Dashboard',
+                borderRadius: BorderRadius.only(topLeft: Radius.circular(30), topRight: Radius.circular(30.0),bottomLeft: Radius.circular(30.0),bottomRight: Radius.circular(30.0)),
                 icon: Icons.person_outline_rounded,
                 backgroundColor: Color(0xff7882ff), onPressed: () {  },
                // onPressed: () => Navigator.push(context, routeSlide(page: InformationPage())),
               ),
-              DividerLine(size: size),
-              CardItemProfile(
-
-                text: 'Add User',
-                borderRadius: BorderRadius.only(bottomLeft: Radius.circular(30), bottomRight: Radius.circular(30.0)),
-                icon: Icons.add,
-
-                backgroundColor: Color(0xff02406F),
-                onPressed: () {  },
-               // onPressed: () => Navigator.push(context, routeSlide(page: AddProductPage())),
-              ),
-
-
-
             ],
           ),
         ),
@@ -159,31 +155,24 @@ class _ListProfileState extends State<ListProfile> {
         ),
         const SizedBox(height: 10.0),
         Container(
-          height: 183,
+          height: 121,
           width: size.width,
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: Theme.of(context).brightness == Brightness.light
+    ? Color.fromRGBO(20,21,23, 1)
+        : Colors.white,
             borderRadius: BorderRadius.circular(30.0)
           ),
           child: Column(
             children: [
-                CardItemProfile(
-                  text: 'Settings',
-                  borderRadius: BorderRadius.only(topLeft: Radius.circular(30), topRight: Radius.circular(30.0)),
-                  backgroundColor: Color(0xff2EAA9B),
-                  icon: Icons.settings_applications,
-                  onPressed: (){},
-                ),
-                DividerLine(size: size),
+
                 CardItemProfile(
                   text: 'Notifications',
-                  borderRadius: BorderRadius.zero,
+                  borderRadius: BorderRadius.only(topLeft:Radius.circular(30),topRight: Radius.circular(30) ),
                   backgroundColor: Color(0xffE87092),
                   icon: Icons.notifications_none_rounded,
                   onPressed: () {},
                 ),
-                DividerLine(size: size),
-
                 DividerLine(size: size),
                 CardItemProfile(
                   text: 'My Devices',
@@ -202,10 +191,12 @@ class _ListProfileState extends State<ListProfile> {
         ),
         const SizedBox(height: 10.0),
         Container(
-          height: 243,
+          height: 182,
           width: size.width,
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: Theme.of(context).brightness == Brightness.light
+    ? Color.fromRGBO(20,21,23, 1)
+        : Colors.white,
             borderRadius: BorderRadius.circular(30.0)
           ),
           child: Column(
@@ -225,14 +216,6 @@ class _ListProfileState extends State<ListProfile> {
                       },
                     );
                   },
-                ),
-                DividerLine(size: size),
-                CardItemProfile(
-                  text: 'Security',
-                  borderRadius: BorderRadius.zero,
-                  backgroundColor: Color(0xff1F252C),
-                  icon: Icons.lock_outline_rounded,
-                  onPressed: (){},
                 ),
                 DividerLine(size: size),
                 CardItemProfile(

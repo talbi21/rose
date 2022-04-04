@@ -168,21 +168,34 @@ class _AddProductPageState extends State<AddProductPage> {
                   validator: RequiredValidator(errorText: 'Description is required'),
                 ),
                 const SizedBox(height: 20.0),
-                Container(
+                DecoratedBox(
                   decoration: BoxDecoration(
-                    color: Color(0xFF2A2B2E),
-                    borderRadius: BorderRadius.circular(100)
-
+                      color: Theme.of(context).brightness == Brightness.light
+                          ? Colors.white70
+                          : Color(0xFF2A2B2E), //background color of dropdown button
+                      border: Border.all(color: Color(0xFF2A2B2E)), //border of dropdown button
+                      borderRadius: BorderRadius.circular(50), //border raiuds of dropdown button
+                     
+                    
                   ),
                   child: Padding(
                     padding: const EdgeInsets.only(left: 25),
                     child: DropdownButton<String>(
 
+
                       elevation: 0,
-                      focusColor: Color(0xFF2A2B2E),
-                      dropdownColor: Color(0xFF2A2B2E),
-                      hint:  TextFrave(text: selectedSubject,color:Colors.white24 ),
-                      style: GoogleFonts.getFont('Roboto', fontSize: 20,color: Colors.white24),
+                      focusColor: Theme.of(context).brightness == Brightness.light
+                          ? Colors.white70
+                          : Color(0xFF2A2B2E),
+                      dropdownColor: Theme.of(context).brightness == Brightness.light
+                          ? Color.fromRGBO(210, 214, 227,1)
+                          : Colors.grey,
+                      hint:  TextFrave(text: selectedSubject,color:Theme.of(context).brightness == Brightness.light
+                          ? Colors.black
+                          : Colors.white ),
+                      style: GoogleFonts.getFont('Roboto', fontSize: 20,color: Theme.of(context).brightness == Brightness.light
+                          ? Colors.black
+                          : Colors.white,),
 
 
 
@@ -200,6 +213,7 @@ class _AddProductPageState extends State<AddProductPage> {
                           child: Text(value
                           ),
 
+
                           value: value,
                         );
                       }).toList(),
@@ -209,30 +223,41 @@ class _AddProductPageState extends State<AddProductPage> {
                 const SizedBox(height: 20.0),
                 MultiSelectDialogField(
                   items: items,
+                  backgroundColor: Theme.of(context).brightness == Brightness.light
+                      ? Colors.white70
+                      : Color(0xFF2A2B2E),
+
 
                   selectedColor: Theme.of(context).brightness == Brightness.light
                       ? Colors.black
-                      : Colors.white,
+                      : Colors.grey,
                   decoration: BoxDecoration(
-                    color: Color(0xFF2A2B2E),
+                    color: Theme.of(context).brightness == Brightness.light
+                        ? Colors.white70
+                        : Color(0xFF2A2B2E),
                     borderRadius: BorderRadius.all(Radius.circular(40)),
                     border: Border.all(
                       color: Color(0xFF2A2B2E),
-                      width: 2,
+
                     ),
                   ),
                   buttonIcon: Icon(
                     Icons.device_hub,
-                    color: Colors.white24,
+                    color: Theme.of(context).brightness == Brightness.light
+                        ? Colors.black
+                        : Colors.white24,
                   ),
                   buttonText: Text(
                     "Choose your devices",
                     style: TextStyle(
-                      color: Colors.white24,
+                      color: Theme.of(context).brightness == Brightness.light
+                          ? Colors.black
+                          : Colors.white24,
                       fontSize: 16,
                     ),
                   ),
                   onConfirm: (results) {
+
 
                     
                     //_selectedAnimals = results;

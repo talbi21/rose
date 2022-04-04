@@ -25,11 +25,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
    //     :false;
 
     final size = MediaQuery.of(context).size;
-    final text = MediaQuery
 
-        .of(context)
-        .platformBrightness == Brightness.light
-        ? 'Light Mode' : 'Dark Mode';
     return Container(
       height: size.height,
       decoration:  BoxDecoration(
