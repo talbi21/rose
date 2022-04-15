@@ -240,7 +240,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     RichText(
                       textAlign: TextAlign.center,
                       text: TextSpan(
-                        text: "By creating an account, you are agreeing to our\n",
+                        text: "By creating an account, you are agreeing\n to our",
                         style: TextStyle(
                           fontSize: 15,
                           color: Theme.of(context).brightness == Brightness.light

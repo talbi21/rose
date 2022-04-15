@@ -203,14 +203,24 @@ class _RoomScreenState extends State<RoomScreen> {
 
       decoration: BoxDecoration(
 
-        color: Color.fromRGBO(42,43,46,1.0),
+        color:
+        Theme.of(context).brightness == Brightness.light
+            ?Colors.grey
+            :Color.fromRGBO(42,43,46,1.0),
         shape: BoxShape.rectangle,
         borderRadius:  BorderRadius.circular(20),
       ),
 
       child: MaterialButton(
-        child: Text(
-            item.name),
+        child: Image.asset(
+
+          item.label,
+height: 100,
+          width: 100,
+
+
+
+        ),
         onPressed: () {
           Navigator.push(context, routeSlide(page: CameraScreen()));
         },

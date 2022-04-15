@@ -137,7 +137,7 @@ class _ListProfileState extends State<ListProfile> {
           child: Column(
             children: [
               CardItemProfile(
-                text: 'Admin Dashboard',
+                text: 'Add  Member',
                 borderRadius: BorderRadius.only(topLeft: Radius.circular(30), topRight: Radius.circular(30.0),bottomLeft: Radius.circular(30.0),bottomRight: Radius.circular(30.0)),
                 icon: Icons.person_outline_rounded,
                 backgroundColor: Color(0xff7882ff), onPressed: () {  },
@@ -175,9 +175,9 @@ class _ListProfileState extends State<ListProfile> {
                 ),
                 DividerLine(size: size),
                 CardItemProfile(
-                  text: 'My Devices',
+                  text: 'Add Device',
                   backgroundColor: Color(0xff0716A5),
-                  icon: Icons.shopping_bag_outlined,
+                  icon: Icons.add,
                   borderRadius: BorderRadius.only(bottomLeft: Radius.circular(30), bottomRight: Radius.circular(30.0)),
                   onPressed: () => Navigator.push(context, routeSlide(page: ShoppingPage())),
                 ),

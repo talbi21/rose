@@ -189,13 +189,16 @@ final List<QuantHotelModel> hotels = [
 class mainDevicesModel {
   final String name;
   final String color;
+  final String label;
 
 
 
 
-  mainDevicesModel( {
+  mainDevicesModel(  {
     required this.name,
     required this.color,
+    required this.label,
+
 
   });
 }
@@ -203,6 +206,8 @@ final List<mainDevicesModel> devicesA = [
   mainDevicesModel(
     name: "Lampe",
     color:"purple",
+    label:"Assets/img/smart-tv.png",
+
 
 
 
@@ -210,64 +215,34 @@ final List<mainDevicesModel> devicesA = [
   ),mainDevicesModel(
 
       name: "Camera",
-      color:"black"
-
+      color:"black",
+    label:"Assets/img/camera-de-surveillance.png",
 
   ),mainDevicesModel(
 
       name: "Music",
-      color:"black22"
-
-
-  ),mainDevicesModel(
-
-      name: "Screen mirroring",
-      color:"black22"
-
+      color:"black22",
+    label:"Assets/img/speaker.png",
 
   ),mainDevicesModel(
 
       name: "Screen mirroring",
-      color:"black22"
-
-
-  ),mainDevicesModel(
-
-      name: "Screen mirroring",
-      color:"black22"
-
+      color:"black22",
+    label:"Assets/img/smart-tv.png",
 
   ),mainDevicesModel(
 
       name: "Screen mirroring",
-      color:"black22"
-
-
-  ),mainDevicesModel(
-
-      name: "Screen mirroring",
-      color:"black22"
-
+      color:"black22",
+    label:"Assets/img/smart-tv.png",
 
   ),mainDevicesModel(
 
-      name: "Screen mirroring",
-      color:"black22"
+name: "Screen mirroring",
+color:"black22",
+label:"Assets/img/smart-tv.png",
 
-
-  ),mainDevicesModel(
-
-      name: "Screen mirroring",
-      color:"black22"
-
-
-  ),mainDevicesModel(
-
-      name: "Screen mirroring",
-      color:"black22"
-
-
-  )
+)
 
 
 ];
