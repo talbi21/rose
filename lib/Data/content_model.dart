@@ -1,3 +1,5 @@
+import 'package:finalrose/ui/Qr%20code/generateQr.dart';
+import 'package:finalrose/ui/Qr%20code/scanQr.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -266,7 +268,8 @@ List<Map> drawerItems = [
   {'icon': Icons.music_note_rounded, 'title': 'Music', 'screen': MusicScreen()},
   {'icon': Icons.video_camera_back_outlined, 'title': 'Cameras', 'screen': CameraScreen()},
   {'icon': Icons.settings, 'title': 'Settings', 'screen': ProfilePage()},
-
+  {'icon': Icons.person, 'title': 'Add Guest', 'screen':QRViewExample()},
+  {'icon': Icons.home, 'title': 'Add Home', 'screen':GenerateQR()},
 ];
 
 
