@@ -1,37 +1,40 @@
-
 import 'package:flutter/material.dart';
 
 import '../../widgets/widgets.dart';
 
-class ShoppingPage extends StatelessWidget{
-
+class ShoppingPage extends StatelessWidget {
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xfff5f5f5),
       appBar: AppBar(
         backgroundColor: Colors.white,
-        title: const TextFrave(text: 'My Devices', color: Colors.black87, fontWeight: FontWeight.w500, fontSize: 20 ),
+        title: const TextFrave(
+            text: 'My Devices',
+            color: Colors.black87,
+            fontWeight: FontWeight.w500,
+            fontSize: 20),
         centerTitle: true,
         elevation: 0,
         leading: IconButton(
           splashRadius: 20,
-          icon: const Icon(Icons.arrow_back_ios_new_rounded, color: Colors.black ),
+          icon:
+              const Icon(Icons.arrow_back_ios_new_rounded, color: Colors.black),
           onPressed: () => Navigator.of(context).pop(),
         ),
-      ),/*
+      ), /*
       body: FutureBuilder<List<OrderBuy>>(
         future: productServices.getPurchasedProducts(),
         builder: (_, snapshot) {
           return ( !snapshot.hasData )
            ? const ShimmerFrave()
            : _DetailsProductsBuy(ordersBuy: snapshot.data! );
-            
+
         } ,
 
       ),
       */
-     );
+    );
   }
 }
 /*
@@ -47,7 +50,7 @@ class _DetailsProductsBuy extends StatelessWidget {
       physics: const BouncingScrollPhysics(),
       padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
       itemCount: ordersBuy.length,
-      itemBuilder: (_, i) 
+      itemBuilder: (_, i)
         => InkWell(
           onTap: () => Navigator.push(context, routeSlide(page: OrderDetailsPage(uidOrder: ordersBuy[i].uidOrderBuy.toString()))),
           child: Container(
@@ -86,8 +89,3 @@ class _DetailsProductsBuy extends StatelessWidget {
   }
 }
 */
-
-
-
-
-

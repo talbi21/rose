@@ -7,15 +7,13 @@ import '../ui/Login/register_page.dart';
 import '../ui/Profile/profile_page.dart';
 import '../ui/Start/start_home_page.dart';
 
-
 Map<String, Widget Function(BuildContext context)> routes = {
-
-  'loadingPage'   : ( context ) => LoadingPage(),
-  'getStarted'    : ( context ) => StartHomePage(),
-  'signInPage'    : ( context ) => SignInPage(),
-  'signUpPage'    : ( context ) => SignUpPage(),
-   'homePage'      : ( context ) => HomePage(),
+  'loadingPage': (context) => LoadingPage(),
+  'getStarted': (context) => StartHomePage(),
+  'signInPage': (context) => SignInPage(),
+  'signUpPage': (context) => SignUpPage(),
+  'homePage': (context) => HomePage(),
   // 'cartPage'      : ( context ) => CartPage(),
   // 'favoritePage'  : ( context ) => FavoritePage(),
-   'profilePage'   : ( context ) => ProfilePage(),
+  'profilePage': (context) => ProfilePage(),
 };

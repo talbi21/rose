@@ -1,6 +1,4 @@
-
 class RoomCart {
-
   final String uidRoom;
 
   final String name;
@@ -9,17 +7,12 @@ class RoomCart {
 
   RoomCart({
     required this.uidRoom,
-
-    required this.name, 
+    required this.name,
     required this.price,
     required this.amount,
   });
 
   Map<String, dynamic> toJson() {
-    return {
-      'uidRoom': uidRoom,
-      'price' : price,
-      'amount': amount
-    };
+    return {'uidRoom': uidRoom, 'price': price, 'amount': amount};
   }
 }

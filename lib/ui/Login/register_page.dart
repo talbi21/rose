@@ -12,14 +12,12 @@ import '../themes/colors_frave.dart';
 import '../widgets/widgets.dart';
 import 'login_page.dart';
 
-
 class SignUpPage extends StatefulWidget {
   @override
   State<SignUpPage> createState() => _SignUpPageState();
 }
 
 class _SignUpPageState extends State<SignUpPage> {
-
   late TextEditingController userController;
   late TextEditingController emailController;
   late TextEditingController passowrdController;
@@ -47,7 +45,7 @@ class _SignUpPageState extends State<SignUpPage> {
     super.dispose();
   }
 
-  void clear(){
+  void clear() {
     userController.clear();
     emailController.clear();
     passowrdController.clear();
@@ -56,26 +54,22 @@ class _SignUpPageState extends State<SignUpPage> {
 
   @override
   Widget build(BuildContext context) {
-
     final userBloc = BlocProvider.of<UserBloc>(context);
     final size = MediaQuery.of(context).size;
 
     return BlocListener<UserBloc, UserState>(
       listener: (context, state) {
-        if( state is LoadingUserState ){
-
+        if (state is LoadingUserState) {
           modalLoading(context, 'Validating...');
         }
-        if( state is SuccessUserState ){
-          
+        if (state is SuccessUserState) {
           Navigator.of(context).pop();
-          modalSuccess(context,'USER CREATED', onPressed: (){
+          modalSuccess(context, 'USER CREATED', onPressed: () {
             clear();
             Navigator.pushReplacement(context, routeSlide(page: SignInPage()));
           });
         }
-        if( state is FailureUserState ){
-
+        if (state is FailureUserState) {
           Navigator.of(context).pop();
           errorMessageSnack(context, state.error);
         }
@@ -84,33 +78,35 @@ class _SignUpPageState extends State<SignUpPage> {
         decoration: BoxDecoration(
           gradient: RadialGradient(
               radius: 0.4,
-              colors:Theme.of(context).brightness == Brightness.light
-                  ? [
-                Colors.white,
-                Colors.blueAccent
-              ]
+              colors: Theme.of(context).brightness == Brightness.light
+                  ? [Colors.white, Colors.blueAccent]
                   : [
-                const Color(0xE6600D51).withOpacity(1),
-                const Color(0xFF121212),
-              ],
+                      const Color(0xE6600D51).withOpacity(1),
+                      const Color(0xFF121212),
+                    ],
               tileMode: TileMode.clamp),
         ),
         child: Scaffold(
           backgroundColor: Colors.transparent,
           appBar: AppBar(
             backgroundColor: Theme.of(context).brightness == Brightness.light
-              ? Colors.blueAccent
-              : Color(0xFF121212),
+                ? Colors.blueAccent
+                : Color(0xFF121212),
             elevation: 0,
             leading: IconButton(
               splashRadius: 20,
-              icon: const Icon(Icons.close_rounded, color: Colors.white,),
+              icon: const Icon(
+                Icons.close_rounded,
+                color: Colors.white,
+              ),
               onPressed: () => Navigator.pop(context),
             ),
             actions: [
               TextButton(
-                child: const TextFrave(text: 'Log In', fontSize: 17, color: Colors.white ),
-                onPressed: () => Navigator.of(context).pushReplacementNamed('signInPage'),
+                child: const TextFrave(
+                    text: 'Log In', fontSize: 17, color: Colors.white),
+                onPressed: () =>
+                    Navigator.of(context).pushReplacementNamed('signInPage'),
               ),
               SizedBox(width: 5)
             ],
@@ -122,46 +118,59 @@ class _SignUpPageState extends State<SignUpPage> {
               keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
               physics: BouncingScrollPhysics(),
               children: [
-                TextFrave(text: 'Welcome to Rose', fontSize: 24, fontWeight: FontWeight.w600,color: Colors.white),
+                TextFrave(
+                    text: 'Welcome to Rose',
+                    fontSize: 24,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.white),
                 SizedBox(height: 5.0),
-                TextFrave(text: 'Create Account', fontSize: 17, color: Theme.of(context).brightness == Brightness.light
-                    ? Colors.black
-                    : Colors.grey,),
+                TextFrave(
+                  text: 'Create Account',
+                  fontSize: 17,
+                  color: Theme.of(context).brightness == Brightness.light
+                      ? Colors.black
+                      : Colors.grey,
+                ),
                 SizedBox(height: 20.0),
                 TextFormFrave(
                   hintText: 'Username',
                   prefixIcon: Icon(Icons.person),
                   controller: userController,
-                  validator: RequiredValidator(errorText: 'Username is required'),
+                  validator:
+                      RequiredValidator(errorText: 'Username is required'),
                 ),
-
                 SizedBox(height: 15.0),
                 TextFormFrave(
-                  hintText: 'Email Address',
-                  keyboardType: TextInputType.emailAddress,
-                  prefixIcon: Icon(Icons.email_outlined),
-                  controller: emailController,
-                  validator: validatedEmail
-                ),
+                    hintText: 'Email Address',
+                    keyboardType: TextInputType.emailAddress,
+                    prefixIcon: Icon(Icons.email_outlined),
+                    controller: emailController,
+                    validator: validatedEmail),
                 SizedBox(height: 15.0),
-
                 TextFormField(
                   controller: passowrdController,
-                  style: GoogleFonts.getFont('Roboto', fontSize: 20,color: Theme.of(context).brightness == Brightness.light
-                      ? Colors.black
-                      : Colors.white),
-
+                  style: GoogleFonts.getFont('Roboto',
+                      fontSize: 20,
+                      color: Theme.of(context).brightness == Brightness.light
+                          ? Colors.black
+                          : Colors.white),
                   cursorColor: ColorsFrave.secundaryColorFrave,
                   obscureText: _obscureTextpass,
                   keyboardType: TextInputType.text,
                   decoration: InputDecoration(
-                      contentPadding: EdgeInsets.symmetric(horizontal: 15, vertical: 15.0),
+                      contentPadding:
+                          EdgeInsets.symmetric(horizontal: 15, vertical: 15.0),
                       filled: true,
-                      fillColor:  Theme.of(context).brightness == Brightness.light
-                          ? Colors.white70
-                          : Color(0xFF2A2B2E),
-                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(100), borderSide: BorderSide(color: Color(0xffF5F5F5))),
-                      enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(100), borderSide: BorderSide(color: Color(0xFF2A2B2E))),
+                      fillColor:
+                          Theme.of(context).brightness == Brightness.light
+                              ? Colors.white70
+                              : Color(0xFF2A2B2E),
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(100),
+                          borderSide: BorderSide(color: Color(0xffF5F5F5))),
+                      enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(100),
+                          borderSide: BorderSide(color: Color(0xFF2A2B2E))),
                       hintText: 'Password',
                       suffixIcon: GestureDetector(
                         onTap: () {
@@ -180,31 +189,33 @@ class _SignUpPageState extends State<SignUpPage> {
                       ),
                       prefixIcon: Icon(Icons.vpn_key_rounded),
                       hintStyle: TextStyle(
-                          color: Theme.of(context).brightness == Brightness.light
-                              ? Colors.black26
-                              : Colors.grey
-
-                      )
-                  ),
+                          color:
+                              Theme.of(context).brightness == Brightness.light
+                                  ? Colors.black26
+                                  : Colors.grey)),
                   validator: passwordValidator,
                 ),
-
                 SizedBox(height: 15.0),
                 TextFormField(
                   controller: passController,
                   style: GoogleFonts.getFont('Roboto', fontSize: 20),
-
                   cursorColor: ColorsFrave.secundaryColorFrave,
                   obscureText: _obscureTextconf,
                   keyboardType: TextInputType.text,
                   decoration: InputDecoration(
-                      contentPadding: EdgeInsets.symmetric(horizontal: 15, vertical: 15.0),
+                      contentPadding:
+                          EdgeInsets.symmetric(horizontal: 15, vertical: 15.0),
                       filled: true,
-                      fillColor:  Theme.of(context).brightness == Brightness.light
-                          ? Colors.white70
-                          : Color(0xFF2A2B2E),
-                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(100), borderSide: BorderSide(color: Color(0xffF5F5F5))),
-                      enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(100), borderSide: BorderSide(color: Color(0xFF2A2B2E))),
+                      fillColor:
+                          Theme.of(context).brightness == Brightness.light
+                              ? Colors.white70
+                              : Color(0xFF2A2B2E),
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(100),
+                          borderSide: BorderSide(color: Color(0xffF5F5F5))),
+                      enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(100),
+                          borderSide: BorderSide(color: Color(0xFF2A2B2E))),
                       hintText: 'Repeat Password',
                       suffixIcon: GestureDetector(
                         onTap: () {
@@ -223,39 +234,41 @@ class _SignUpPageState extends State<SignUpPage> {
                       ),
                       prefixIcon: Icon(Icons.vpn_key_rounded),
                       hintStyle: TextStyle(
-                          color:Theme.of(context).brightness == Brightness.light
-                              ? Colors.black26
-                              : Colors.grey
-
-                      )
-                  ),
-                  validator: (val) => MatchValidator(errorText: 'Password do not macth ').validateMatch(val!, passowrdController.text),
+                          color:
+                              Theme.of(context).brightness == Brightness.light
+                                  ? Colors.black26
+                                  : Colors.grey)),
+                  validator: (val) =>
+                      MatchValidator(errorText: 'Password do not macth ')
+                          .validateMatch(val!, passowrdController.text),
                 ),
-
                 SizedBox(height: 25.0),
-
                 Row(
-                  children:  [
+                  children: [
                     Icon(Icons.check_circle_rounded, color: Color(0xff0C6CF2)),
                     RichText(
                       textAlign: TextAlign.center,
                       text: TextSpan(
-                        text: "By creating an account, you are agreeing\n to our",
+                        text:
+                            "By creating an account, you are agreeing\n to our",
                         style: TextStyle(
-                          fontSize: 15,
-                          color: Theme.of(context).brightness == Brightness.light
-                              ? Color(0xFF2A2B2E)
-                              : Colors.white
-                        ),
+                            fontSize: 15,
+                            color:
+                                Theme.of(context).brightness == Brightness.light
+                                    ? Color(0xFF2A2B2E)
+                                    : Colors.white),
                         children: [
                           TextSpan(
                             text: "Terms & Conditions ",
-                            style: TextStyle(fontWeight: FontWeight.bold,color:  Color(0xff0C6CF2)),
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Color(0xff0C6CF2)),
                             recognizer: TapGestureRecognizer()
                               ..onTap = () {
                                 showModal(
                                   context: context,
-                                  configuration: FadeScaleTransitionConfiguration(),
+                                  configuration:
+                                      FadeScaleTransitionConfiguration(),
                                   builder: (context) {
                                     return PolicyDialog(
                                       mdFileName: 'terms_and_conditions.md',
@@ -267,7 +280,9 @@ class _SignUpPageState extends State<SignUpPage> {
                           TextSpan(text: "and "),
                           TextSpan(
                             text: "Privacy Policy! ",
-                            style: TextStyle(fontWeight: FontWeight.bold,color:  Color(0xff0C6CF2)),
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Color(0xff0C6CF2)),
                             recognizer: TapGestureRecognizer()
                               ..onTap = () {
                                 showDialog(
@@ -285,20 +300,16 @@ class _SignUpPageState extends State<SignUpPage> {
                     ),
                   ],
                 ),
-
                 SizedBox(height: 25.0),
                 Container(
                   width: size.width,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(100),
-                    gradient:  LinearGradient(
-                        colors: Theme.of(context).brightness == Brightness.light
-                            ?
-                        [
-                          Colors.black,
-                          Colors.blueAccent
-                        ]
-                            : [Color(0xE6600D51), Colors.blueAccent],),
+                    gradient: LinearGradient(
+                      colors: Theme.of(context).brightness == Brightness.light
+                          ? [Colors.black, Colors.blueAccent]
+                          : [Color(0xE6600D51), Colors.blueAccent],
+                    ),
                   ),
                   child: MaterialButton(
                     minWidth: size.width,
@@ -307,16 +318,14 @@ class _SignUpPageState extends State<SignUpPage> {
                       style: TextStyle(
                         fontSize: 22,
                         color: Colors.white,
-
                       ),
                     ),
-                    onPressed: (){
-                      if( _formKey.currentState!.validate() ){
-                        userBloc.add( OnAddNewUser(
+                    onPressed: () {
+                      if (_formKey.currentState!.validate()) {
+                        userBloc.add(OnAddNewUser(
                             userController.text.trim(),
                             emailController.text.trim(),
-                            passowrdController.text.trim()
-                        ));
+                            passowrdController.text.trim()));
                       }
                     },
                   ),
@@ -324,10 +333,8 @@ class _SignUpPageState extends State<SignUpPage> {
               ],
             ),
           ),
-         ),
+        ),
       ),
     );
   }
 }
-
-

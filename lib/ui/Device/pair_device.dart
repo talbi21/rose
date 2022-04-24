@@ -30,7 +30,7 @@ class _PairDeviceState extends State<PairDevice> {
               child: TextFormField(
                 decoration: const InputDecoration(
                     border: OutlineInputBorder(), labelText: "Button name"),
-                onSaved: (String? value) {
+                onChanged: (String? value) {
                   _functionName = value;
                 },
               ),
@@ -41,7 +41,8 @@ class _PairDeviceState extends State<PairDevice> {
                 child: ElevatedButton(
                   onPressed: () async {
                     setState(() {
-                      _labelCodePower = "Press the power button on the remote";
+                      _labelCodePower =
+                          "Press the " + _functionName! + " on the remote";
                     });
 
                     Map<String, String> headers = {
@@ -55,13 +56,12 @@ class _PairDeviceState extends State<PairDevice> {
                     http
                         .post(
                             Uri.parse(
-                                URLS.baseUrl3000 + "/devices/pair-device"),
+                                URLS.baseUrl6000 + "/devices/pair-device"),
                             headers: headers,
                             body: jsonEncode(body))
                         .then((http.Response response) async {
                       setState(() {
-                        _labelCodePower = "Success";
-                        _currentDeviceJson = response.body;
+                        Navigator.pop(context);
                       });
                     });
                   },
@@ -70,10 +70,10 @@ class _PairDeviceState extends State<PairDevice> {
               ),
             ),
             Container(
-                margin: const EdgeInsets.only(top: 100),
+                margin: const EdgeInsets.only(top: 20),
                 child: Text(_labelCodePower)),
             Container(
-                margin: const EdgeInsets.only(top: 50),
+                margin: const EdgeInsets.only(top: 20),
                 child: Container(
                   margin: const EdgeInsets.all(20),
                   child: Text(

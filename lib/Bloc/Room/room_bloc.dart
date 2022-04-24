@@ -7,11 +7,9 @@ part 'room_event.dart';
 part 'room_state.dart';
 
 class RoomBloc extends Bloc<RoomEvent, RoomState> {
-
   List<RoomCart> room = [];
 
-  RoomBloc() : super(RoomInitial()){
-
+  RoomBloc() : super(RoomInitial()) {
     on<OnAddOrDeleteRoomFavoriteEvent>(_addOrDeleteRoomFavorite);
     on<OnAddRoomToCartEvent>(_addRoomToCart);
     on<OnDeleteRoomToCartEvent>(_deleteRoomCart);
@@ -21,11 +19,10 @@ class RoomBloc extends Bloc<RoomEvent, RoomState> {
     on<OnSaveRoomsBuyToDatabaseEvent>(_saveRoomToDatabase);
     on<OnSelectPathImageRoomEvent>(_selectImageForRoom);
     on<OnSaveNewRoomEvent>(_addNewRoom);
-
   }
 
-
-  Future<void> _addOrDeleteRoomFavorite( OnAddOrDeleteRoomFavoriteEvent event, Emitter<RoomState> emit ) async {
+  Future<void> _addOrDeleteRoomFavorite(
+      OnAddOrDeleteRoomFavoriteEvent event, Emitter<RoomState> emit) async {
 /*
     try {
 
@@ -38,7 +35,7 @@ class RoomBloc extends Bloc<RoomEvent, RoomState> {
       }else{
         emit(FailureRoomState(data.message));
       }
-      
+
     } catch (e) {
       emit(FailureRoomState(e.toString()));
     }
@@ -47,70 +44,63 @@ class RoomBloc extends Bloc<RoomEvent, RoomState> {
  */
   }
 
+  Future<void> _addRoomToCart(
+      OnAddRoomToCartEvent event, Emitter<RoomState> emit) async {
+    final hasRoom = room.contains(event.room);
 
-  Future<void> _addRoomToCart( OnAddRoomToCartEvent event, Emitter<RoomState> emit ) async {
-
-    final hasRoom = room.contains( event.room );
-
-    if( !hasRoom ){
-
-      room.add( event.room );
+    if (!hasRoom) {
+      room.add(event.room);
 
       double sum = 0;
 
-      room.forEach((e) => sum = sum + e.price );
+      room.forEach((e) => sum = sum + e.price);
 
-      emit( SetAddRoomToCartState(rooms: room, total: sum, amount: room.length ));
-
+      emit(SetAddRoomToCartState(rooms: room, total: sum, amount: room.length));
     }
   }
 
-
-  Future<void> _deleteRoomCart( OnDeleteRoomToCartEvent event, Emitter<RoomState> emit ) async {
-
+  Future<void> _deleteRoomCart(
+      OnDeleteRoomToCartEvent event, Emitter<RoomState> emit) async {
     room.removeAt(event.index);
 
     double sum = 0;
     room.forEach((e) => sum = sum + e.price);
 
-    emit( SetAddRoomToCartState(rooms: room, total: sum, amount: room.length));
+    emit(SetAddRoomToCartState(rooms: room, total: sum, amount: room.length));
   }
 
+  Future<void> _plusQuantityRoom(
+      OnPlusQuantityRoomEvent event, Emitter<RoomState> emit) async {
+    room[event.plus].amount++;
 
-  Future<void> _plusQuantityRoom( OnPlusQuantityRoomEvent event, Emitter<RoomState> emit ) async {
+    double total = 0;
+    room.forEach((e) => total = total + (e.price * e.amount));
 
-     room[event.plus].amount++;
+    emit(SetAddRoomToCartState(rooms: room, total: total, amount: room.length));
+  }
 
-     double total = 0;
-     room.forEach((e) => total = total + (e.price * e.amount));
+  Future<void> _subtractQuantityRoom(
+      OnSubtractQuantityRoomEvent event, Emitter<RoomState> emit) async {
+    room[event.subtract].amount--;
 
-      emit( SetAddRoomToCartState(rooms: room, total: total, amount: room.length));
-   }
+    double total = 0;
+    room.forEach((e) => total = total - (e.price * e.amount));
 
+    emit(SetAddRoomToCartState(
+        rooms: room, total: total.abs(), amount: room.length));
+  }
 
-  Future<void> _subtractQuantityRoom( OnSubtractQuantityRoomEvent event, Emitter<RoomState> emit ) async {
-
-     room[event.subtract].amount--;
-
-     double total = 0;
-     room.forEach((e) => total = total - (e.price * e.amount));
-
-      emit( SetAddRoomToCartState(rooms: room, total: total.abs(), amount: room.length));
-   }
-
-
-  Future<void> _clearRoom( OnClearRoomsEvent event, Emitter<RoomState> emit ) async {
-
+  Future<void> _clearRoom(
+      OnClearRoomsEvent event, Emitter<RoomState> emit) async {
     room.clear();
-    emit( RoomInitial() );
+    emit(RoomInitial());
+  }
 
-   }
-
-
-  Future<void> _saveRoomToDatabase( OnSaveRoomsBuyToDatabaseEvent event, Emitter<RoomState> emit ) async {
+  Future<void> _saveRoomToDatabase(
+      OnSaveRoomsBuyToDatabaseEvent event, Emitter<RoomState> emit) async {
 /*
     try {
-      
+
       emit(LoadingRoomState());
 
       final data = await roomServices.saveOrderBuyRoomToDatabase('Ticket', event.amount, event.room);
@@ -128,18 +118,16 @@ class RoomBloc extends Bloc<RoomEvent, RoomState> {
  */
   }
 
-
-  Future<void> _selectImageForRoom( OnSelectPathImageRoomEvent event, Emitter<RoomState> emit ) async {
-
-    emit( SetImageForRoomState(event.image) );
-
+  Future<void> _selectImageForRoom(
+      OnSelectPathImageRoomEvent event, Emitter<RoomState> emit) async {
+    emit(SetImageForRoomState(event.image));
   }
 
-
-  Future<void> _addNewRoom( OnSaveNewRoomEvent event, Emitter<RoomState> emit ) async {
+  Future<void> _addNewRoom(
+      OnSaveNewRoomEvent event, Emitter<RoomState> emit) async {
 /*
     try {
-      
+
       emit(LoadingRoomState());
 
       final data = await roomServices.addNewRoom(event.name, event.description, event.stock, event.price);
@@ -155,10 +143,5 @@ class RoomBloc extends Bloc<RoomEvent, RoomState> {
     }
 
  */
-
   }
-
-
-
-
 }

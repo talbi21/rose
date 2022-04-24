@@ -54,15 +54,12 @@ class _PinCodeVerificationScreenState extends State<PinCodeVerificationScreen> {
       decoration: BoxDecoration(
         gradient: RadialGradient(
             radius: 0.4,
-            colors:Theme.of(context).brightness == Brightness.light
-                ? [
-              Colors.white,
-              Colors.blueAccent
-            ]
+            colors: Theme.of(context).brightness == Brightness.light
+                ? [Colors.white, Colors.blueAccent]
                 : [
-              const Color(0xE6600D51).withOpacity(1),
-              const Color(0xFF121212),
-            ],
+                    const Color(0xE6600D51).withOpacity(1),
+                    const Color(0xFF121212),
+                  ],
             tileMode: TileMode.clamp),
       ),
       child: Scaffold(
@@ -74,9 +71,9 @@ class _PinCodeVerificationScreenState extends State<PinCodeVerificationScreen> {
           elevation: 0,
           leading: IconButton(
             icon: const Icon(Icons.arrow_back_outlined),
-            color:Theme.of(context).brightness == Brightness.light
+            color: Theme.of(context).brightness == Brightness.light
                 ? Colors.black
-                : Colors.white ,
+                : Colors.white,
             onPressed: () {
               Navigator.of(context).pop();
             },
@@ -84,21 +81,19 @@ class _PinCodeVerificationScreenState extends State<PinCodeVerificationScreen> {
         ),
         backgroundColor: Colors.transparent,
         body: Container(
-
-
           child: ListView(
             children: <Widget>[
-
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 20),
-                child: Image.asset("Assets/img/verifym.png",
+                child: Image.asset(
+                  "Assets/img/verifym.png",
                   height: 150,
                   width: 150,
                 ),
               ),
               const SizedBox(height: 8),
               const Padding(
-                padding:  EdgeInsets.symmetric(vertical: 8.0),
+                padding: EdgeInsets.symmetric(vertical: 8.0),
                 child: Text(
                   'Email Address Verification',
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
@@ -107,23 +102,27 @@ class _PinCodeVerificationScreenState extends State<PinCodeVerificationScreen> {
               ),
               Padding(
                 padding:
-                    const EdgeInsets.symmetric(horizontal: 30.0, vertical:20),
+                    const EdgeInsets.symmetric(horizontal: 30.0, vertical: 20),
                 child: RichText(
                   text: TextSpan(
                       text: "Enter the code sent to ",
                       children: [
                         TextSpan(
                             text: "${widget.phoneNumber}",
-                            style:  TextStyle(
-                                color: Theme.of(context).brightness == Brightness.light
+                            style: TextStyle(
+                                color: Theme.of(context).brightness ==
+                                        Brightness.light
                                     ? Colors.blue
                                     : Colors.lightBlue,
                                 fontWeight: FontWeight.bold,
                                 fontSize: 17)),
                       ],
-                      style: TextStyle(color:  Theme.of(context).brightness == Brightness.light
-                          ? Colors.black
-                          : Colors.grey, fontSize: 22)),
+                      style: TextStyle(
+                          color:
+                              Theme.of(context).brightness == Brightness.light
+                                  ? Colors.black
+                                  : Colors.grey,
+                          fontSize: 22)),
                   textAlign: TextAlign.center,
                 ),
               ),
@@ -144,7 +143,7 @@ class _PinCodeVerificationScreenState extends State<PinCodeVerificationScreen> {
                       length: 6,
                       obscureText: true,
                       obscuringCharacter: '*',
-                      obscuringWidget:const Text(
+                      obscuringWidget: const Text(
                         "*",
                         style: TextStyle(
                             fontWeight: FontWeight.bold, fontSize: 20),
@@ -162,10 +161,7 @@ class _PinCodeVerificationScreenState extends State<PinCodeVerificationScreen> {
                         inactiveColor: Colors.grey[200],
                         inactiveFillColor: Colors.white,
                         selectedFillColor: Colors.white,
-
-
                         disabledColor: Colors.grey,
-
                         errorBorderColor: Colors.redAccent,
                         shape: PinCodeFieldShape.box,
                         borderRadius: BorderRadius.circular(5),
@@ -211,7 +207,7 @@ class _PinCodeVerificationScreenState extends State<PinCodeVerificationScreen> {
                 padding: const EdgeInsets.symmetric(horizontal: 20.0),
                 child: Text(
                   hasError ? "*Please fill up all the cells properly" : "",
-                  style:const TextStyle(
+                  style: const TextStyle(
                       color: Colors.red,
                       fontSize: 12,
                       fontWeight: FontWeight.w400),
@@ -223,20 +219,23 @@ class _PinCodeVerificationScreenState extends State<PinCodeVerificationScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                   Text(
+                  Text(
                     "Didn't receive the code? ",
-                    style: TextStyle(color:Theme.of(context).brightness == Brightness.light
-                        ? Colors.black
-                        : Colors.grey, fontSize: 15),
+                    style: TextStyle(
+                        color: Theme.of(context).brightness == Brightness.light
+                            ? Colors.black
+                            : Colors.grey,
+                        fontSize: 15),
                   ),
                   TextButton(
                       onPressed: () => snackBar("OTP resend!!"),
                       child: Text(
                         "resend",
                         style: TextStyle(
-color: Theme.of(context).brightness == Brightness.light
-    ? Colors.black
-    : Color(0xff0C6CF2),
+                            color:
+                                Theme.of(context).brightness == Brightness.light
+                                    ? Colors.black
+                                    : Color(0xff0C6CF2),
                             fontWeight: FontWeight.bold,
                             fontSize: 16),
                       ))
@@ -267,25 +266,20 @@ color: Theme.of(context).brightness == Brightness.light
                         );
                       }
                     },
-                    child:  Center(
+                    child: Center(
                         child: Text(
                       "Verify",
-                          style: Theme.of(context)
-                              .textTheme
-                              .titleSmall,
+                      style: Theme.of(context).textTheme.titleSmall,
                     )),
                   ),
                 ),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(100),
-                  gradient:  LinearGradient(
+                  gradient: LinearGradient(
                     colors: Theme.of(context).brightness == Brightness.light
-                        ?
-                    [
-                      Colors.black,
-                      Colors.blueAccent
-                    ]
-                        : [Color(0xE6600D51), Colors.blueAccent],),
+                        ? [Colors.black, Colors.blueAccent]
+                        : [Color(0xE6600D51), Colors.blueAccent],
+                  ),
                 ),
               ),
               const SizedBox(
@@ -296,11 +290,12 @@ color: Theme.of(context).brightness == Brightness.light
                 children: <Widget>[
                   Flexible(
                       child: TextButton(
-                    child: Text("Clear",style: TextStyle(
-                      color:  Theme.of(context).brightness == Brightness.light
-                          ? Colors.black
-                          : Colors.lightBlue
-                    )),
+                    child: Text("Clear",
+                        style: TextStyle(
+                            color:
+                                Theme.of(context).brightness == Brightness.light
+                                    ? Colors.black
+                                    : Colors.lightBlue)),
                     onPressed: () {
                       textEditingController.clear();
                     },

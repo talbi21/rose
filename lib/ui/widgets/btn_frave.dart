@@ -1,7 +1,6 @@
 part of 'widgets.dart';
 
 class BtnFrave extends StatelessWidget {
-
   final String text;
   final double width;
   final double height;
@@ -11,18 +10,17 @@ class BtnFrave extends StatelessWidget {
   final double fontSize;
   final VoidCallback? onPressed;
 
-  const BtnFrave({
-    Key? key,
-    required this.text,
-    required this.width,
-    this.onPressed,
-    this.height = 50,
-    this.border = 8.0,
-    this.colorText = Colors.white,
-    this.fontSize = 19,
-    this.backgroundColor = ColorsFrave.primaryColorFrave
-  }) : super(key: key);
-
+  const BtnFrave(
+      {Key? key,
+      required this.text,
+      required this.width,
+      this.onPressed,
+      this.height = 50,
+      this.border = 8.0,
+      this.colorText = Colors.white,
+      this.fontSize = 19,
+      this.backgroundColor = ColorsFrave.primaryColorFrave})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -31,12 +29,12 @@ class BtnFrave extends StatelessWidget {
       width: width,
       child: TextButton(
         style: TextButton.styleFrom(
-          primary: Colors.white,
-          backgroundColor: backgroundColor,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100))
-        ),
+            primary: Colors.white,
+            backgroundColor: backgroundColor,
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(100))),
         child: TextFrave(text: text, color: colorText, fontSize: fontSize),
-        onPressed: onPressed, 
+        onPressed: onPressed,
       ),
     );
   }

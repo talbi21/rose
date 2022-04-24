@@ -4,9 +4,6 @@ import 'package:provider/provider.dart';
 
 import '../../Data/content_model.dart';
 import '../../theme.dart';
-import '../Profile/widgets/divider_line.dart';
-
-
 
 class DrawerScreen extends StatefulWidget {
   const DrawerScreen({Key? key}) : super(key: key);
@@ -20,33 +17,23 @@ class _DrawerScreenState extends State<DrawerScreen> {
 
   @override
   Widget build(BuildContext context) {
-   // isLight = Theme.of(context).brightness == Brightness.light
-   //     ? true
-   //     :false;
+    // isLight = Theme.of(context).brightness == Brightness.light
+    //     ? true
+    //     :false;
 
     final size = MediaQuery.of(context).size;
 
     return Container(
       height: size.height,
-      decoration:  BoxDecoration(
+      decoration: BoxDecoration(
           gradient: LinearGradient(
-            stops: [0.5,0.5],
-            colors:
-
-
-            Theme.of(context).brightness == Brightness.light
-                ? [
-              Colors.blueAccent,
-              Colors.transparent
-
-            ]
-                : [Color(0xFF121212),  Colors.transparent],
-
-          )),
+        stops: [0.5, 0.5],
+        colors: Theme.of(context).brightness == Brightness.light
+            ? [Colors.blueAccent, Colors.transparent]
+            : [Color(0xFF121212), Colors.transparent],
+      )),
       padding: EdgeInsets.only(top: 30, bottom: 20, left: 10),
-
       child: Column(
-
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Row(
@@ -65,54 +52,45 @@ class _DrawerScreenState extends State<DrawerScreen> {
                   ),
                   Text('User',
                       style: TextStyle(
-                          color: Colors.white, fontWeight: FontWeight.bold)
-                  )
-
+                          color: Colors.white, fontWeight: FontWeight.bold))
                 ],
               ),
             ],
-
           ),
-
-
           Column(
             children: drawerItems
-                .map((element) =>
-                Padding(
-                  padding: const EdgeInsets.all(15.0),
-                  child: Row(
-                    children: [
-                      InkWell(
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => element['screen']));
-                        },
-                        child: Icon(
-                          element['icon'],
-                          color: Colors.white,
-                          size: 25,
-                        ),
-                      ),
-                      SizedBox(
-                        width: 20,
-                      ),
-                      Text(element['title'],
-                          style: TextStyle(
+                .map((element) => Padding(
+                      padding: const EdgeInsets.all(15.0),
+                      child: Row(
+                        children: [
+                          InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => element['screen']));
+                            },
+                            child: Icon(
+                              element['icon'],
                               color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20))
-                    ],
-                  ),
-                ))
+                              size: 25,
+                            ),
+                          ),
+                          SizedBox(
+                            width: 20,
+                          ),
+                          Text(element['title'],
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20))
+                        ],
+                      ),
+                    ))
                 .toList(),
           ),
           Row(
             children: [
-
-
-
               SizedBox(
                 width: 10,
               ),
@@ -134,22 +112,17 @@ class _DrawerScreenState extends State<DrawerScreen> {
               SizedBox(
                 width: 10,
               ),
-                Consumer<ThemeProvider>(builder: (context, provider, child) {
-                  return Switch.adaptive(
-                      value: Theme.of(context).brightness == Brightness.light
-                           ? false
-                          :true ,
-                onChanged: (value) {
-                        isLight = !isLight;
-                        provider.changeTheme(
-                            isLight? 'dark' :'light'
-                  );
-
-
-
-                },
-              );
-  }),
+              Consumer<ThemeProvider>(builder: (context, provider, child) {
+                return Switch.adaptive(
+                  value: Theme.of(context).brightness == Brightness.light
+                      ? false
+                      : true,
+                  onChanged: (value) {
+                    isLight = !isLight;
+                    provider.changeTheme(isLight ? 'dark' : 'light');
+                  },
+                );
+              }),
             ],
           )
         ],
@@ -157,5 +130,3 @@ class _DrawerScreenState extends State<DrawerScreen> {
     );
   }
 }
-
-

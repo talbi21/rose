@@ -1,12 +1,11 @@
-
 part of 'helpers.dart';
 
 class PolicyDialog extends StatelessWidget {
   PolicyDialog({
-
     this.radius = 8,
     required this.mdFileName,
-  })  : assert(mdFileName.contains('.md'), 'The file must contain the .md extension'),
+  })  : assert(mdFileName.contains('.md'),
+            'The file must contain the .md extension'),
         super();
 
   final double radius;
@@ -15,7 +14,8 @@ class PolicyDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Dialog(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(radius)),
+      shape:
+          RoundedRectangleBorder(borderRadius: BorderRadius.circular(radius)),
       child: Column(
         children: [
           Expanded(

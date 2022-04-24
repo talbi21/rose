@@ -13,7 +13,7 @@ class AddDevice extends StatefulWidget {
 
 class _AddDeviceState extends State<AddDevice> {
   late String? _name = "";
-  late String? _type = "";
+  late String? _type = "TV";
 
   final GlobalKey<FormState> _keyForm = GlobalKey<FormState>();
 
@@ -28,23 +28,46 @@ class _AddDeviceState extends State<AddDevice> {
         child: ListView(
           children: [
             Container(
-              margin: const EdgeInsets.all(10),
-              child: TextFormField(
-                decoration: const InputDecoration(
-                    border: OutlineInputBorder(), labelText: "Name"),
-                onSaved: (String? value) {
-                  _name = value;
-                },
-              ),
+              margin: const EdgeInsets.all(30),
+              child: const Icon(Icons.devices_rounded, size: 150),
             ),
             Container(
               margin: const EdgeInsets.all(10),
               child: TextFormField(
                 decoration: const InputDecoration(
-                    border: OutlineInputBorder(), labelText: "Type"),
-                onSaved: (String? value) {
-                  _type = value;
+                    border: OutlineInputBorder(), labelText: "Name"),
+                onChanged: (String? value) {
+                  setState(() {
+                    _name = value!;
+                  });
                 },
+              ),
+            ),
+            Container(
+              margin: const EdgeInsets.all(20),
+              child: DropdownButton<String>(
+                value: _type,
+                icon: const Icon(Icons.keyboard_arrow_down),
+                elevation: 16,
+                underline: Container(
+                  height: 2,
+                ),
+                onChanged: (String? newValue) {
+                  setState(() {
+                    _type = newValue!;
+                  });
+                },
+                items: <String>[
+                  'TV',
+                  'Climatiseur',
+                  'Projecteur',
+                  'Haut-parleur'
+                ].map<DropdownMenuItem<String>>((String value) {
+                  return DropdownMenuItem<String>(
+                    value: value,
+                    child: Text(value),
+                  );
+                }).toList(),
               ),
             ),
             Container(
@@ -52,7 +75,6 @@ class _AddDeviceState extends State<AddDevice> {
               child: ElevatedButton(
                 child: const Text("Add"),
                 onPressed: () {
-
                   Map<String, String> headers = {
                     "Content-Type": "application/json"
                   };
@@ -63,7 +85,7 @@ class _AddDeviceState extends State<AddDevice> {
                   };
 
                   http
-                      .post(Uri.parse(URLS.baseUrl3000 + "/devices/one"),
+                      .post(Uri.parse(URLS.baseUrl6000 + "/devices/one"),
                           headers: headers, body: jsonEncode(body))
                       .then((value) => {Navigator.pop(context)});
                 },

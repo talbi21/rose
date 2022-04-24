@@ -1,14 +1,14 @@
-
 import 'dart:async';
 import 'dart:io';
 import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
+import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:screenshot/screenshot.dart';
 import 'package:share/share.dart';
-import 'package:image_gallery_saver/image_gallery_saver.dart';
 
 class GenerateQR extends StatefulWidget {
   @override
@@ -58,9 +58,10 @@ class _GenerateQRState extends State<GenerateQR> {
                           } else {
                             final image = await controller.capture();
                             if (image == null) return;
-                            await saveImage(image);  ////this method is used to images saved in gallery..
+                            await saveImage(
+                                image); ////this method is used to images saved in gallery..
                             setState(() {
-                            //  qrData = qrdataFeed.text.toString();
+                              //  qrData = qrdataFeed.text.toString();
                               print(qrdataFeed.text.toString());
                             });
                           }
@@ -87,7 +88,6 @@ class _GenerateQRState extends State<GenerateQR> {
                           final image = await controller.capture();
                           saveAndShare(
                               image!); //this method is used to images that have been saved will be shared in the galleryshare image
-
                         },
                         //Title given on Button
                         child: Row(
@@ -123,7 +123,7 @@ class _GenerateQRState extends State<GenerateQR> {
         ),
       );
 
- /* buildTextField() {
+  /* buildTextField() {
     return Container(
       child: TextField(
         controller: qrdataFeed,
@@ -155,5 +155,3 @@ class _GenerateQRState extends State<GenerateQR> {
     await Share.shareFiles([image.path]);
   }
 }
-
-

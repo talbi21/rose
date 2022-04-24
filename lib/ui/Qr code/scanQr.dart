@@ -1,13 +1,11 @@
-
 import 'dart:convert';
 import 'dart:developer';
 
 import 'package:finalrose/ui/Qr%20code/resultPage.dart';
-import 'package:http/http.dart' as http;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 import 'package:qr_code_scanner/qr_code_scanner.dart';
-
 
 class QRViewExample extends StatefulWidget {
   @override
@@ -18,14 +16,14 @@ class _QRViewExampleState extends State<QRViewExample> {
   Barcode? result;
   QRViewController? controller;
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
-  var _currentDeviceJson = "" ;
+  var _currentDeviceJson = "";
 
   // In order to get hot reload to work we need to pause the camera if the platform
   // is android, or resume the camera if the platform is iOS.
   @override
   void reassemble() {
     super.reassemble();
-  /*  if (Platform.isAndroid) {
+    /*  if (Platform.isAndroid) {
       controller!.pauseCamera();
     } */
     controller!.resumeCamera();
@@ -74,8 +72,7 @@ class _QRViewExampleState extends State<QRViewExample> {
                               builder: (context, snapshot) {
                                 if (snapshot.data != null) {
                                   return Text(
-                                      'Camera facing ${describeEnum(
-                                          snapshot.data!)}');
+                                      'Camera facing ${describeEnum(snapshot.data!)}');
                                 } else {
                                   return Text('loading');
                                 }
@@ -119,14 +116,8 @@ class _QRViewExampleState extends State<QRViewExample> {
 
   Widget _buildQrView(BuildContext context) {
     // For this example we check how width or tall the device is and change the scanArea and overlay accordingly.
-    var scanArea = (MediaQuery
-        .of(context)
-        .size
-        .width < 400 ||
-        MediaQuery
-            .of(context)
-            .size
-            .height < 400)
+    var scanArea = (MediaQuery.of(context).size.width < 400 ||
+            MediaQuery.of(context).size.height < 400)
         ? 150.0
         : 300.0;
     // To ensure the Scanner view is properly sizes after rotation
@@ -147,10 +138,8 @@ class _QRViewExampleState extends State<QRViewExample> {
   void _onQRViewCreated(QRViewController controller) {
     this.controller = controller;
     controller.scannedDataStream.listen((scanData) {
-print ( "aaaaaaaaaaaa") ;
-      Map<String, String> headers = {
-        "Content-Type": "application/json"
-      };
+      print("aaaaaaaaaaaa");
+      Map<String, String> headers = {"Content-Type": "application/json"};
       Map<String, String> body = {
         "email": "testqrmmmm@email.com",
         "password": "123456",
@@ -164,28 +153,23 @@ print ( "aaaaaaaaaaaa") ;
       };
 
       http
-          .post(
-          Uri.parse(
-              "http://192.168.43.37:3000/one"),
-          headers: headers,
-          body: jsonEncode(body))
+          .post(Uri.parse("http://192.168.43.37:3000/one"),
+              headers: headers, body: jsonEncode(body))
           .then((http.Response response) async {
         setState(() {
           print("Success");
-           _currentDeviceJson = response.body;
-
+          _currentDeviceJson = response.body;
         });
       });
       result = scanData;
       controller.dispose();
 
-          Navigator.push(
+      Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) =>
-                ResultPage(
-                  result: result,
-                ),
+            builder: (context) => ResultPage(
+              result: result,
+            ),
           ));
     });
   }

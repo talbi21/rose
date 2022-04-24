@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:finalrose/Data/content_model.dart';
@@ -19,11 +20,39 @@ class ShowDevice extends StatefulWidget {
 }
 
 class _ShowDeviceState extends State<ShowDevice> {
+  FutureOr onGoBack(dynamic value) {
+    setState(() {
+      widget._infraredCodes.add(new InfraredCode("0", "function", "value"));
+    });
+  }
+
+  @override
+  _ShowDeviceState createState() => _ShowDeviceState();
+
+  void deleteDevice(String _id) {
+    Map<String, String> headers = {"Content-Type": "application/json"};
+    Map<String, String> body = {
+      "_id": _id,
+    };
+
+    http
+        .delete(Uri.parse(URLS.baseUrl6000 + "/devices/one"),
+            headers: headers, body: jsonEncode(body))
+        .then((http.Response response) async {});
+
+    Navigator.pop(context);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget._name),
+        actions: [
+          MaterialButton(
+              onPressed: () => {deleteDevice(widget._id)},
+              child: const Icon(Icons.delete))
+        ],
       ),
       body: Column(
         children: [
@@ -49,7 +78,7 @@ class _ShowDeviceState extends State<ShowDevice> {
                         Navigator.push(context,
                             MaterialPageRoute(builder: (BuildContext context) {
                           return PairDevice(widget._id);
-                        }));
+                        })).then(onGoBack);
                       },
                     ),
                   ),
@@ -123,7 +152,8 @@ class _ShowDeviceState extends State<ShowDevice> {
             "function": function,
           };
 
-          http.post(Uri.parse(URLS.baseUrl3000 + "/devices/send-ir-code"),
+          http
+              .post(Uri.parse(URLS.baseUrl6000 + "/devices/send-ir-code"),
                   headers: headers, body: jsonEncode(body))
               .then((http.Response response) async {});
         },

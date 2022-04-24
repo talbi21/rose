@@ -2,13 +2,9 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 
-
-
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 import '../../Data/content_model.dart';
-
-
 
 class MusicScreen extends StatefulWidget {
   const MusicScreen({Key? key}) : super(key: key);
@@ -18,8 +14,9 @@ class MusicScreen extends StatefulWidget {
 }
 
 class _MusicScreenState extends State<MusicScreen> {
-  double minutes =0;
+  double minutes = 0;
   bool playing = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,12 +24,12 @@ class _MusicScreenState extends State<MusicScreen> {
         elevation: 0,
         backgroundColor: Theme.of(context).brightness == Brightness.light
             ? Colors.white
-            : Color.fromRGBO(20,21,23, 1),
+            : Color.fromRGBO(20, 21, 23, 1),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_outlined),
-          color:Theme.of(context).brightness == Brightness.light
+          color: Theme.of(context).brightness == Brightness.light
               ? Colors.black
-              : Colors.white ,
+              : Colors.white,
           onPressed: () {
             Navigator.of(context).pop();
           },
@@ -40,12 +37,9 @@ class _MusicScreenState extends State<MusicScreen> {
       ),
       body: Container(
         decoration: BoxDecoration(
-
-            color:Theme.of(context).brightness == Brightness.light
+            color: Theme.of(context).brightness == Brightness.light
                 ? Colors.white
-                : Color.fromRGBO(20,21,23, 1)
-
-        ),
+                : Color.fromRGBO(20, 21, 23, 1)),
         child: Column(
           children: [
             Container(
@@ -62,7 +56,7 @@ class _MusicScreenState extends State<MusicScreen> {
                       fontSize: 30,
                       fontWeight: FontWeight.w800,
                       color: Theme.of(context).brightness == Brightness.light
-                          ?Color.fromRGBO(20,21,23, 1)
+                          ? Color.fromRGBO(20, 21, 23, 1)
                           : Colors.white,
                     ),
                   ),
@@ -85,7 +79,7 @@ class _MusicScreenState extends State<MusicScreen> {
                     style: TextStyle(
                         fontSize: 25,
                         color: Theme.of(context).brightness == Brightness.light
-                            ?Color.fromRGBO(20,21,23, 1)
+                            ? Color.fromRGBO(20, 21, 23, 1)
                             : Colors.white,
                         fontWeight: FontWeight.bold),
                   ),
@@ -97,7 +91,7 @@ class _MusicScreenState extends State<MusicScreen> {
                     style: TextStyle(
                         fontSize: 15,
                         color: Theme.of(context).brightness == Brightness.light
-                            ?Color.fromRGBO(20,21,23, 1)
+                            ? Color.fromRGBO(20, 21, 23, 1)
                             : Colors.white,
                         fontWeight: FontWeight.normal),
                   ),
@@ -111,7 +105,7 @@ class _MusicScreenState extends State<MusicScreen> {
                         Icons.skip_previous,
                         size: 50,
                         color: Theme.of(context).brightness == Brightness.light
-                            ?Color.fromRGBO(20,21,23, 1)
+                            ? Color.fromRGBO(20, 21, 23, 1)
                             : Colors.white,
                       ),
                       GestureDetector(
@@ -121,24 +115,20 @@ class _MusicScreenState extends State<MusicScreen> {
                           });
                         },
                         child: Icon(
-
-                          playing
-                              ? Icons.pause
-                              : Icons.play_arrow,
-                          semanticLabel: playing
-                              ? 'Play'
-                              : 'Pause',
+                          playing ? Icons.pause : Icons.play_arrow,
+                          semanticLabel: playing ? 'Play' : 'Pause',
                           size: 50,
-                          color: Theme.of(context).brightness == Brightness.light
-                              ?Color.fromRGBO(20,21,23, 1)
-                              : Colors.white,
+                          color:
+                              Theme.of(context).brightness == Brightness.light
+                                  ? Color.fromRGBO(20, 21, 23, 1)
+                                  : Colors.white,
                         ),
                       ),
                       Icon(
                         Icons.skip_next,
                         size: 50,
-                        color:Theme.of(context).brightness == Brightness.light
-                            ?Color.fromRGBO(20,21,23, 1)
+                        color: Theme.of(context).brightness == Brightness.light
+                            ? Color.fromRGBO(20, 21, 23, 1)
                             : Colors.white,
                       ),
                     ],
@@ -153,11 +143,9 @@ class _MusicScreenState extends State<MusicScreen> {
                   inactiveColor: Colors.grey[350],
                   value: minutes,
                   max: 3600,
-                 
                   onChanged: (value) {
                     setState(() {
-                      minutes =value;
-
+                      minutes = value;
                     });
                   }),
             ),

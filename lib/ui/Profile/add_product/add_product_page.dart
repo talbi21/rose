@@ -1,20 +1,14 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:multi_select_flutter/dialog/multi_select_dialog_field.dart';
-import 'package:permission_handler/permission_handler.dart';
 
 import '../../../Bloc/Room/room_bloc.dart';
 import '../../../Data/content_model.dart';
 import '../../../Helpers/helpers.dart';
 import '../../Home/home_page.dart';
-import '../../themes/colors_frave.dart';
 import '../../widgets/widgets.dart';
-import '../profile_page.dart';
 
 class AddProductPage extends StatefulWidget {
   AddProductPage({Key? key}) : super(key: key);
@@ -24,7 +18,6 @@ class AddProductPage extends StatefulWidget {
 }
 
 class _AddProductPageState extends State<AddProductPage> {
-
   late TextEditingController _nameProductController;
   late TextEditingController _descriptionProductController;
   late TextEditingController _stockController;
@@ -58,22 +51,22 @@ class _AddProductPageState extends State<AddProductPage> {
 
   @override
   Widget build(BuildContext context) {
-
     final size = MediaQuery.of(context).size;
     final roomBloc = BlocProvider.of<RoomBloc>(context);
-   // final categoryBloc = BlocProvider.of<CategoryBloc>(context);
+    // final categoryBloc = BlocProvider.of<CategoryBloc>(context);
 
     return BlocListener<RoomBloc, RoomState>(
       listener: (context, state) {
-        if(state is LoadingRoomState){
+        if (state is LoadingRoomState) {
           modalLoading(context, 'Checking...');
-        }else if(state is FailureRoomState){
+        } else if (state is FailureRoomState) {
           Navigator.pop(context);
           errorMessageSnack(context, state.error);
-        }else if( state is SuccessRoomState ){
+        } else if (state is SuccessRoomState) {
           Navigator.pop(context);
-          modalSuccess(context, 'Room Added!', onPressed: (){
-            Navigator.pushAndRemoveUntil(context, routeSlide(page: HomePage()), (_) => false);
+          modalSuccess(context, 'Room Added!', onPressed: () {
+            Navigator.pushAndRemoveUntil(
+                context, routeSlide(page: HomePage()), (_) => false);
           });
         }
       },
@@ -82,40 +75,40 @@ class _AddProductPageState extends State<AddProductPage> {
           gradient: RadialGradient(
               radius: 0.4,
               colors: Theme.of(context).brightness == Brightness.light
-                  ? [
-                Colors.white,
-                Colors.blueAccent
-              ]
+                  ? [Colors.white, Colors.blueAccent]
                   : [
-                const Color(0xE6600D51).withOpacity(1),
-                const Color(0xFF121212),
-
-
-              ],
+                      const Color(0xE6600D51).withOpacity(1),
+                      const Color(0xFF121212),
+                    ],
               tileMode: TileMode.clamp),
         ),
         child: Scaffold(
           backgroundColor: Colors.transparent,
           appBar: AppBar(
-            backgroundColor:  Theme.of(context).brightness == Brightness.light
-                ?Colors.blueAccent
-                : Color(0xFF121212) ,
-
+            backgroundColor: Theme.of(context).brightness == Brightness.light
+                ? Colors.blueAccent
+                : Color(0xFF121212),
             elevation: 0,
-            title:  TextFrave(text: 'Add New Room', fontSize: 20, fontWeight: FontWeight.bold,color:Theme.of(context).brightness == Brightness.light
-                ? Colors.black
-                : Colors.white, ),
+            title: TextFrave(
+              text: 'Add New Room',
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+              color: Theme.of(context).brightness == Brightness.light
+                  ? Colors.black
+                  : Colors.white,
+            ),
             centerTitle: true,
             leading: IconButton(
               splashRadius: 20,
               onPressed: () => Navigator.pop(context),
-              icon:  Icon(Icons.arrow_back_ios_new_rounded, color:Theme.of(context).brightness == Brightness.light
-                  ? Colors.black
-                  : Colors.white),
+              icon: Icon(Icons.arrow_back_ios_new_rounded,
+                  color: Theme.of(context).brightness == Brightness.light
+                      ? Colors.black
+                      : Colors.white),
             ),
             actions: [
               TextButton(
-                /*
+                  /*
                   onPressed: () {
                     if(_keyForm.currentState!.validate()){
 
@@ -133,25 +126,27 @@ class _AddProductPageState extends State<AddProductPage> {
 
                  */
 
-
                   onPressed: () {
-                  modalSuccess(context, 'Room Added!', onPressed: (){
-                    Navigator.pushAndRemoveUntil(context, routeSlide(page: HomePage()), (_) => false);
-                  }); },
-                  child:  TextFrave(text: 'Save', color: Theme.of(context).brightness == Brightness.light
-                      ? Colors.black
-                      : Colors.white, fontWeight: FontWeight.w500, )
-              )
+                    modalSuccess(context, 'Room Added!', onPressed: () {
+                      Navigator.pushAndRemoveUntil(
+                          context, routeSlide(page: HomePage()), (_) => false);
+                    });
+                  },
+                  child: TextFrave(
+                    text: 'Save',
+                    color: Theme.of(context).brightness == Brightness.light
+                        ? Colors.black
+                        : Colors.white,
+                    fontWeight: FontWeight.w500,
+                  ))
             ],
           ),
           body: Form(
             key: _keyForm,
             child: ListView(
-              padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
               children: [
-
-
-
                 const SizedBox(height: 20.0),
                 TextFormFrave(
                   controller: _nameProductController,
@@ -159,61 +154,60 @@ class _AddProductPageState extends State<AddProductPage> {
                   hintText: 'Name',
                   validator: RequiredValidator(errorText: 'name is required'),
                 ),
-
                 const SizedBox(height: 20.0),
                 TextFormFrave(
                   controller: _descriptionProductController,
                   prefixIcon: const Icon(Icons.add),
                   hintText: 'Description',
-                  validator: RequiredValidator(errorText: 'Description is required'),
+                  validator:
+                      RequiredValidator(errorText: 'Description is required'),
                 ),
                 const SizedBox(height: 20.0),
                 DecoratedBox(
                   decoration: BoxDecoration(
-                      color: Theme.of(context).brightness == Brightness.light
-                          ? Colors.white70
-                          : Color(0xFF2A2B2E), //background color of dropdown button
-                      border: Border.all(color: Color(0xFF2A2B2E)), //border of dropdown button
-                      borderRadius: BorderRadius.circular(50), //border raiuds of dropdown button
-                     
-                    
+                    color: Theme.of(context).brightness == Brightness.light
+                        ? Colors.white70
+                        : Color(0xFF2A2B2E),
+                    //background color of dropdown button
+                    border: Border.all(color: Color(0xFF2A2B2E)),
+                    //border of dropdown button
+                    borderRadius: BorderRadius.circular(
+                        50), //border raiuds of dropdown button
                   ),
                   child: Padding(
                     padding: const EdgeInsets.only(left: 25),
                     child: DropdownButton<String>(
-
-
                       elevation: 0,
-                      focusColor: Theme.of(context).brightness == Brightness.light
-                          ? Colors.white70
-                          : Color(0xFF2A2B2E),
-                      dropdownColor: Theme.of(context).brightness == Brightness.light
-                          ? Color.fromRGBO(210, 214, 227,1)
-                          : Colors.grey,
-                      hint:  TextFrave(text: selectedSubject,color:Theme.of(context).brightness == Brightness.light
-                          ? Colors.black
-                          : Colors.white ),
-                      style: GoogleFonts.getFont('Roboto', fontSize: 20,color: Theme.of(context).brightness == Brightness.light
-                          ? Colors.black
-                          : Colors.white,),
-
-
-
-
-
-                      onChanged: (value){
-
-                    //    hotels.add(results as QuantHotelModel);
+                      focusColor:
+                          Theme.of(context).brightness == Brightness.light
+                              ? Colors.white70
+                              : Color(0xFF2A2B2E),
+                      dropdownColor:
+                          Theme.of(context).brightness == Brightness.light
+                              ? Color.fromRGBO(210, 214, 227, 1)
+                              : Colors.grey,
+                      hint: TextFrave(
+                          text: selectedSubject,
+                          color:
+                              Theme.of(context).brightness == Brightness.light
+                                  ? Colors.black
+                                  : Colors.white),
+                      style: GoogleFonts.getFont(
+                        'Roboto',
+                        fontSize: 20,
+                        color: Theme.of(context).brightness == Brightness.light
+                            ? Colors.black
+                            : Colors.white,
+                      ),
+                      onChanged: (value) {
+                        //    hotels.add(results as QuantHotelModel);
                         setState(() {
                           selectedSubject = value.toString();
                         });
                       },
-                      items: subjects.map<DropdownMenuItem<String>>((value){
+                      items: subjects.map<DropdownMenuItem<String>>((value) {
                         return DropdownMenuItem(
-                          child: Text(value
-                          ),
-
-
+                          child: Text(value),
                           value: value,
                         );
                       }).toList(),
@@ -223,14 +217,14 @@ class _AddProductPageState extends State<AddProductPage> {
                 const SizedBox(height: 20.0),
                 MultiSelectDialogField(
                   items: items,
-                  backgroundColor: Theme.of(context).brightness == Brightness.light
-                      ? Colors.white70
-                      : Color(0xFF2A2B2E),
-
-
-                  selectedColor: Theme.of(context).brightness == Brightness.light
-                      ? Colors.black
-                      : Colors.grey,
+                  backgroundColor:
+                      Theme.of(context).brightness == Brightness.light
+                          ? Colors.white70
+                          : Color(0xFF2A2B2E),
+                  selectedColor:
+                      Theme.of(context).brightness == Brightness.light
+                          ? Colors.black
+                          : Colors.grey,
                   decoration: BoxDecoration(
                     color: Theme.of(context).brightness == Brightness.light
                         ? Colors.white70
@@ -238,7 +232,6 @@ class _AddProductPageState extends State<AddProductPage> {
                     borderRadius: BorderRadius.all(Radius.circular(40)),
                     border: Border.all(
                       color: Color(0xFF2A2B2E),
-
                     ),
                   ),
                   buttonIcon: Icon(
@@ -257,18 +250,11 @@ class _AddProductPageState extends State<AddProductPage> {
                     ),
                   ),
                   onConfirm: (results) {
-
-
-                    
                     //_selectedAnimals = results;
                   },
                 )
 
-
-
-
-
-              /*  InkWell(
+                /*  InkWell(
                   onTap: () => modalCategoies(context, size),
                   borderRadius: BorderRadius.circular(10.0),
                   child: Container(
@@ -289,30 +275,11 @@ class _AddProductPageState extends State<AddProductPage> {
                   ),
                 ),
                 */
-
-
               ],
             ),
-
           ),
         ),
       ),
     );
   }
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

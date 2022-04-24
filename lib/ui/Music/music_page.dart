@@ -1,14 +1,6 @@
-
-
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../Bloc/General/general_bloc.dart';
-import '../../Helpers/helpers.dart';
-import '../widgets/widgets.dart';
 import 'musicscreen.dart';
-
-
 
 class Music_Page extends StatefulWidget {
   @override
@@ -16,15 +8,13 @@ class Music_Page extends StatefulWidget {
 }
 
 class _Music_PageState extends State<Music_Page> {
-
   @override
-  Widget build(BuildContext context){
-
-    final size =  MediaQuery.of(context).size;
+  Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
 
     return
 
-      /*
+        /*
       BlocListener<ProductBloc, ProductState>(
       listener: (context, state){
         if( state is LoadingProductState ){
@@ -37,20 +27,14 @@ class _Music_PageState extends State<Music_Page> {
           setState(() {});
         }
       },
-      child: */Scaffold(
+      child: */
+        Scaffold(
       backgroundColor: Color(0xfff5f5f5),
       body: Stack(
         children: [
-
-
           MusicScreen(),
-
-
-
-
         ],
       ),
     );
-
   }
 }

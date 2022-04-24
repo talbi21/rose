@@ -1,10 +1,6 @@
-
-
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../Bloc/General/general_bloc.dart';
+
 import '../../Helpers/helpers.dart';
-import '../widgets/widgets.dart';
 import 'homescreen.dart';
 
 class HomePage extends StatefulWidget {
@@ -13,16 +9,14 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-
   @override
-  Widget build(BuildContext context){
-
-    final size =  MediaQuery.of(context).size;
-    final   _allow = true;
+  Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    final _allow = true;
 
     return
 
-      /*
+        /*
       BlocListener<ProductBloc, ProductState>(
       listener: (context, state){
         if( state is LoadingProductState ){
@@ -35,31 +29,25 @@ class _HomePageState extends State<HomePage> {
           setState(() {});
         }
       },
-      child: */WillPopScope(
-      onWillPop: (){
-      print('Backbutton pressed (device or appbar button), do whatever you want.');
-      //trigger leaving and use own data
-      modalExit(context);
+      child: */
+        WillPopScope(
+      onWillPop: () {
+        print(
+            'Backbutton pressed (device or appbar button), do whatever you want.');
+        //trigger leaving and use own data
+        modalExit(context);
 
-      //we need to return a future
-      return Future.value(false);
-    },
-
+        //we need to return a future
+        return Future.value(false);
+      },
       child: Scaffold(
-          backgroundColor: Color(0xfff5f5f5),
-          body: Stack(
-            children: [
-
-
-              HomeScreen(),
-
-
-    
-
-            ],
-          ),
-         ),
-      );
-
+        backgroundColor: Color(0xfff5f5f5),
+        body: Stack(
+          children: [
+            HomeScreen(),
+          ],
+        ),
+      ),
+    );
   }
 }

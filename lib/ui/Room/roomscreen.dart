@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:math';
 
@@ -19,13 +20,20 @@ class RoomScreen extends StatefulWidget {
 }
 
 class _RoomScreenState extends State<RoomScreen> {
-  final List<Device> _devices = [];
+  late List<Device> _devices = [];
 
   late Future<bool> fetchedData;
 
+  FutureOr onGoBack(dynamic value) {
+    _devices = [];
+    setState(() {
+      fetchData();
+    });
+  }
+
   Future<bool> fetchData() async {
     http.Response response =
-        await http.get(Uri.parse(URLS.baseUrl3000 + "/devices/all"));
+        await http.get(Uri.parse(URLS.baseUrl6000 + "/devices/all"));
 
     List<dynamic> devicesFromServer = json.decode(response.body)["devices"];
     for (var i = 0; i < devicesFromServer.length; i++) {
@@ -158,7 +166,8 @@ class _RoomScreenState extends State<RoomScreen> {
                           ]),
                       onPressed: () {
                         Navigator.push(
-                            context, routeSlide(page: const AddDevice()));
+                                context, routeSlide(page: const AddDevice()))
+                            .then(onGoBack);
                       },
                       textColor: Colors.grey,
                     ),
@@ -258,9 +267,12 @@ class _RoomScreenState extends State<RoomScreen> {
           children: [
             const Icon(Icons.devices_outlined),
             Text(item.name),
-            Text(
-              item.type,
-              style: const TextStyle(fontWeight: FontWeight.w300),
+            Container(
+              margin: const EdgeInsets.only(top: 30),
+              child: Text(
+                item.type,
+                style: const TextStyle(fontWeight: FontWeight.w400),
+              ),
             )
           ],
         ),
@@ -269,7 +281,7 @@ class _RoomScreenState extends State<RoomScreen> {
               MaterialPageRoute(builder: (BuildContext context) {
             return ShowDevice(
                 item.id, item.name, item.type, item.infraredCodes);
-          }));
+          })).then(onGoBack);
         },
         textColor: Colors.white,
       ),

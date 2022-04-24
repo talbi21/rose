@@ -1,11 +1,6 @@
-import 'dart:math';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
-
-
-
 
 class Lighscreen extends StatefulWidget {
   const Lighscreen({Key? key}) : super(key: key);
@@ -15,14 +10,14 @@ class Lighscreen extends StatefulWidget {
 }
 
 class _LighscreenState extends State<Lighscreen> {
-  late  MediaQueryData? _mediaQueryData =MediaQuery.of(context);
+  late MediaQueryData? _mediaQueryData = MediaQuery.of(context);
   bool lighton = false;
   bool isSelected = false;
   final List<bool> isSelectedd = [true, false];
-  double Intensity =56;
-
+  double Intensity = 56;
 
   PanelController pc = new PanelController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,7 +35,7 @@ class _LighscreenState extends State<Lighscreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         SizedBox(
-                          height:40 / 585 * _mediaQueryData!.size.height,
+                          height: 40 / 585 * _mediaQueryData!.size.height,
                         ),
                         InkWell(
                             onTap: () {
@@ -55,9 +50,9 @@ class _LighscreenState extends State<Lighscreen> {
                                   .textTheme
                                   .headline1!
                                   .copyWith(
-                                fontSize: 45,
-                                color: Color(0xFFBDBDBD).withOpacity(0.5),
-                              ),
+                                    fontSize: 45,
+                                    color: Color(0xFFBDBDBD).withOpacity(0.5),
+                                  ),
                             ),
                             Text(
                               'Living\nRoom',
@@ -73,7 +68,7 @@ class _LighscreenState extends State<Lighscreen> {
                           style: Theme.of(context).textTheme.headline2,
                         ),
                         SizedBox(
-                          height:4 / 585 * _mediaQueryData!.size.height,
+                          height: 4 / 585 * _mediaQueryData!.size.height,
                         ),
                         Switch.adaptive(
                           inactiveThumbColor: Color(0xFFE4E4E4),
@@ -88,27 +83,27 @@ class _LighscreenState extends State<Lighscreen> {
                           },
                         ),
                         SizedBox(
-                          height:20 / 585 * _mediaQueryData!.size.height,
+                          height: 20 / 585 * _mediaQueryData!.size.height,
                         ),
                         Text(
                           'Color',
                           style: Theme.of(context).textTheme.headline2,
                         ),
                         SizedBox(
-                          height:7 / 585 * _mediaQueryData!.size.height,
+                          height: 7 / 585 * _mediaQueryData!.size.height,
                         ),
                         InkWell(
-                          onTap:(){ pc.open();},
+                          onTap: () {
+                            pc.open();
+                          },
                           child: Image.asset(
                             'assets/color_wheel.png',
-                            height:22 / 585 * _mediaQueryData!.size.height,
+                            height: 22 / 585 * _mediaQueryData!.size.height,
                           ),
                         ),
                       ],
                     ),
-                    SizedBox(
-                      height: 40 / 585 * _mediaQueryData!.size.height
-                    ),
+                    SizedBox(height: 40 / 585 * _mediaQueryData!.size.height),
                   ],
                 ),
                 Column(
@@ -123,28 +118,26 @@ class _LighscreenState extends State<Lighscreen> {
                     ///todo: Position this image in correct manner
                     lighton
                         ? Image.asset(
-                      'assets/purple.png',
-                      height: 190 / 585 * _mediaQueryData!.size.height,
-                      width: 140 / 270 * _mediaQueryData!.size.width,
-                      fit: BoxFit.contain,
-                      alignment: Alignment.topCenter,
-                    )
+                            'assets/purple.png',
+                            height: 190 / 585 * _mediaQueryData!.size.height,
+                            width: 140 / 270 * _mediaQueryData!.size.width,
+                            fit: BoxFit.contain,
+                            alignment: Alignment.topCenter,
+                          )
                         : SizedBox(
-                      height: 190/ 585 * _mediaQueryData!.size.height,
-                      width:140 / 270 * _mediaQueryData!.size.width,
-                    ),
+                            height: 190 / 585 * _mediaQueryData!.size.height,
+                            width: 140 / 270 * _mediaQueryData!.size.width,
+                          ),
                   ],
                 ),
               ],
             ),
             Padding(
               padding: EdgeInsets.symmetric(
-                horizontal:15 / 270 * _mediaQueryData!.size.width
-              ),
+                  horizontal: 15 / 270 * _mediaQueryData!.size.width),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-
                   SizedBox(
                     height: 20 / 585 * _mediaQueryData!.size.height,
                   ),
@@ -167,13 +160,14 @@ class _LighscreenState extends State<Lighscreen> {
                         thumbColor: Color(0xFF464646),
                         activeTrackColor: Color(0xFF464646),
                         inactiveTrackColor: Colors.white,
-                        thumbShape: RoundSliderThumbShape(enabledThumbRadius: 8)),
+                        thumbShape:
+                            RoundSliderThumbShape(enabledThumbRadius: 8)),
                     child: Slider(
                       min: 0,
                       max: 100,
                       onChanged: (val) {
                         setState(() {
-                          Intensity =val;
+                          Intensity = val;
                         });
                       },
                       value: Intensity,
@@ -200,10 +194,4 @@ class _LighscreenState extends State<Lighscreen> {
       ),
     );
   }
-
-
-
 }
-
-
-

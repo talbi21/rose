@@ -1,9 +1,6 @@
-import 'dart:math';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sleek_circular_slider/sleek_circular_slider.dart';
-
 
 class LampeScreen extends StatefulWidget {
   const LampeScreen({Key? key}) : super(key: key);
@@ -60,7 +57,7 @@ class _LampeScreenState extends State<LampeScreen> {
                     size: 300.00,
                     infoProperties: InfoProperties(
                       mainLabelStyle:
-                      TextStyle(fontSize: 50, color: Colors.white),
+                          TextStyle(fontSize: 50, color: Colors.white),
                     ),
                   ),
                   initialValue: 0,
@@ -98,7 +95,7 @@ class _LampeScreenState extends State<LampeScreen> {
                 padding: const EdgeInsets.all(20.0),
                 child: GridView.builder(
                     gridDelegate:
-                    const SliverGridDelegateWithFixedCrossAxisCount(
+                        const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 4,
                       crossAxisSpacing: 10,
                       mainAxisSpacing: 10,
@@ -134,12 +131,9 @@ class _LampeScreenState extends State<LampeScreen> {
       ),
       child: MaterialButton(
         child: Container(
-          decoration: BoxDecoration(
-              color : Colors.red,
-              shape: BoxShape.circle
-          ),
+          decoration: BoxDecoration(color: Colors.red, shape: BoxShape.circle),
         ),
-        onPressed: () { },
+        onPressed: () {},
         textColor: Colors.white,
       ),
     );
