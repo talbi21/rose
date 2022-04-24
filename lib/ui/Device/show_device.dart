@@ -22,7 +22,7 @@ class ShowDevice extends StatefulWidget {
 class _ShowDeviceState extends State<ShowDevice> {
   FutureOr onGoBack(dynamic value) {
     setState(() {
-      widget._infraredCodes.add(new InfraredCode("0", "function", "value"));
+      //widget._infraredCodes.add(new InfraredCode("0", "function", "value"));
     });
   }
 
@@ -51,14 +51,19 @@ class _ShowDeviceState extends State<ShowDevice> {
         actions: [
           MaterialButton(
               onPressed: () => {deleteDevice(widget._id)},
-              child: const Icon(Icons.delete))
+              child: Icon(
+                Icons.delete,
+                color: Theme.of(context).brightness == Brightness.light
+                    ? Colors.white
+                    : const Color.fromRGBO(20, 21, 23, 1),
+              ))
         ],
       ),
       body: Column(
         children: [
           SizedBox(
             width: double.infinity,
-            height: 250,
+            height: 290,
             child: Card(
               margin: const EdgeInsets.all(15),
               child: Column(
@@ -66,10 +71,18 @@ class _ShowDeviceState extends State<ShowDevice> {
                 children: [
                   Container(
                       margin: const EdgeInsets.all(20),
-                      child: Text("Name : " + widget._name)),
-                  Container(
-                      margin: const EdgeInsets.all(20),
-                      child: Text("Type : " + widget._type)),
+                      child: Column(
+                        children: [
+                          const Icon(
+                            Icons.devices_outlined,
+                            size: 100,
+                          ),
+                          Text(
+                            widget._type + " " + widget._name,
+                            style: const TextStyle(fontSize: 20),
+                          ),
+                        ],
+                      )),
                   Container(
                     margin: const EdgeInsets.all(20),
                     child: ElevatedButton(
@@ -121,7 +134,7 @@ class _ShowDeviceState extends State<ShowDevice> {
   Widget _buttonBuilder(String function, Icon icon) {
     return Container(
       decoration: BoxDecoration(
-        color: const Color.fromRGBO(150, 150, 150, 0.7),
+        color: const Color.fromRGBO(0, 0, 0, 0.5),
         shape: BoxShape.rectangle,
         borderRadius: BorderRadius.circular(20),
       ),

@@ -31,13 +31,15 @@ class TextFormFrave extends StatelessWidget {
           filled: true,
           fillColor: Theme.of(context).brightness == Brightness.light
               ? Colors.white70
-              : Color(0xFF2A2B2E),
+              : const Color(0xFF2A2B2E),
           border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(100),
               borderSide: BorderSide(color: Color(0xffF5F5F5))),
           enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(100),
-              borderSide: BorderSide(color: Color(0xFF2A2B2E))),
+              borderSide: BorderSide(color: Theme.of(context).brightness == Brightness.light
+                  ? const Color.fromARGB(70, 0, 0, 0)
+                  : const Color.fromARGB(70, 255, 255, 255))),
           hintText: hintText,
           prefixIcon: prefixIcon,
           hintStyle: TextStyle(

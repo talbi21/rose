@@ -27,7 +27,7 @@ class _RoomScreenState extends State<RoomScreen> {
   FutureOr onGoBack(dynamic value) {
     _devices = [];
     setState(() {
-      fetchData();
+      fetchedData = fetchData();
     });
   }
 
@@ -239,14 +239,17 @@ class _RoomScreenState extends State<RoomScreen> {
         ),
         child: MaterialButton(
           child:
-              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-            Icon(Icons.highlight),
+              Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+            const Icon(Icons.highlight),
+            const SizedBox(width: 10),
             Text(item.name),
           ]),
           onPressed: () {
             Navigator.push(context, routeSlide(page: LampeScreen()));
           },
-          textColor: Colors.grey,
+          textColor: Theme.of(context).brightness == Brightness.light
+              ? Colors.white
+              : const Color.fromRGBO(42, 43, 46, 1.0),
         ),
       ),
     );
@@ -280,7 +283,8 @@ class _RoomScreenState extends State<RoomScreen> {
           Navigator.push(context,
               MaterialPageRoute(builder: (BuildContext context) {
             return ShowDevice(
-                item.id, item.name, item.type, item.infraredCodes);
+                item.id, item.name, item.type, item.infraredCodes
+            );
           })).then(onGoBack);
         },
         textColor: Colors.white,

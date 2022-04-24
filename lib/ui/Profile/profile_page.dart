@@ -1,25 +1,13 @@
 import 'package:animations/animations.dart';
 import 'package:finalrose/ui/Profile/shopping/shopping_page.dart';
 import 'package:finalrose/ui/Profile/widgets/card_item_profile.dart';
-import 'package:finalrose/ui/Profile/widgets/divider_line.dart';
 import 'package:flutter/material.dart';
-import 'package:animate_do/animate_do.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:permission_handler/permission_handler.dart';
-import 'package:provider/provider.dart';
 
 import '../../Bloc/General/general_bloc.dart';
 import '../../Bloc/user/user_bloc.dart';
 import '../../Helpers/helpers.dart';
-import '../../Service/urls.dart';
-import '../../theme.dart';
-import '../Home/home_page.dart';
-
-import '../themes/colors_frave.dart';
-import '../widgets/shimmer_frave.dart';
 import '../widgets/widgets.dart';
-import 'information_page.dart';
 
 class ProfilePage extends StatelessWidget {
   @override
@@ -40,7 +28,7 @@ class ProfilePage extends StatelessWidget {
       child: Scaffold(
         backgroundColor: Theme.of(context).brightness == Brightness.light
             ? Colors.white
-            : Color.fromRGBO(20, 21, 23, 1),
+            : const Color.fromRGBO(20, 21, 23, 1),
         appBar: AppBar(
           elevation: 0,
           backgroundColor: Theme.of(context).brightness == Brightness.light
@@ -109,9 +97,9 @@ class _ListProfileState extends State<ListProfile> {
       controller: _scrollController,
       children: [
         const SizedBox(height: 25.0),
-        Padding(
-          padding: const EdgeInsets.only(left: 25.0),
-          child: const TextFrave(
+        const Padding(
+          padding: EdgeInsets.only(left: 25.0),
+          child: TextFrave(
             text: 'Admin',
             fontSize: 17,
             color: Colors.grey,
@@ -157,21 +145,20 @@ class _ListProfileState extends State<ListProfile> {
           width: size.width,
           decoration: BoxDecoration(
               color: Theme.of(context).brightness == Brightness.light
-                  ? Color.fromRGBO(20, 21, 23, 1)
+                  ? const Color.fromRGBO(20, 21, 23, 1)
                   : Colors.white,
               borderRadius: BorderRadius.circular(30.0)),
           child: Column(
             children: [
               CardItemProfile(
                 text: 'Notifications',
-                borderRadius: BorderRadius.only(
+                borderRadius: const BorderRadius.only(
                     topLeft: Radius.circular(30),
                     topRight: Radius.circular(30)),
                 backgroundColor: Color(0xffE87092),
                 icon: Icons.notifications_none_rounded,
                 onPressed: () {},
               ),
-              DividerLine(size: size),
               CardItemProfile(
                 text: 'Add Device',
                 backgroundColor: Color(0xff0716A5),
@@ -186,9 +173,9 @@ class _ListProfileState extends State<ListProfile> {
           ),
         ),
         const SizedBox(height: 15.0),
-        Padding(
+        const Padding(
           padding: EdgeInsets.only(left: 25.0),
-          child: const TextFrave(
+          child: TextFrave(
             text: 'Personal',
             fontSize: 17,
             color: Colors.grey,
@@ -207,7 +194,7 @@ class _ListProfileState extends State<ListProfile> {
             children: [
               CardItemProfile(
                 text: 'Privacy & Policy',
-                borderRadius: BorderRadius.only(
+                borderRadius: const BorderRadius.only(
                     topLeft: Radius.circular(30),
                     topRight: Radius.circular(30.0)),
                 backgroundColor: Color(0xff6dbd63),
@@ -223,7 +210,6 @@ class _ListProfileState extends State<ListProfile> {
                   );
                 },
               ),
-              DividerLine(size: size),
               CardItemProfile(
                 text: 'Term & Conditions',
                 borderRadius: BorderRadius.zero,
@@ -241,12 +227,11 @@ class _ListProfileState extends State<ListProfile> {
                   );
                 },
               ),
-              DividerLine(size: size),
               CardItemProfile(
                 text: 'Help',
                 backgroundColor: Color(0xff4772e6),
                 icon: Icons.help_outline,
-                borderRadius: BorderRadius.only(
+                borderRadius: const BorderRadius.only(
                     bottomLeft: Radius.circular(30),
                     bottomRight: Radius.circular(30.0)),
                 onPressed: () {},

@@ -1,3 +1,4 @@
+import 'package:finalrose/ui/Profile/information_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -27,35 +28,47 @@ class _DrawerScreenState extends State<DrawerScreen> {
       height: size.height,
       decoration: BoxDecoration(
           gradient: LinearGradient(
-        stops: [0.5, 0.5],
+        stops: const [0.5, 0.5],
         colors: Theme.of(context).brightness == Brightness.light
             ? [Colors.blueAccent, Colors.transparent]
-            : [Color(0xFF121212), Colors.transparent],
+            : [const Color(0xFF121212), Colors.transparent],
       )),
-      padding: EdgeInsets.only(top: 30, bottom: 20, left: 10),
+      padding: const EdgeInsets.only(top: 30, bottom: 20, left: 10),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Row(
-            children: [
-              CircleAvatar(),
-              SizedBox(
-                width: 10,
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Achref Talbi',
-                    style: TextStyle(
-                        color: Colors.white, fontWeight: FontWeight.bold),
-                  ),
-                  Text('User',
+          const Padding(padding: EdgeInsets.all(0)),
+          InkWell(
+            onTap: () => {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (BuildContext context) {
+                return const InformationPage();
+              }))
+            },
+            child: Row(
+              children: [
+                Container(
+                  margin: const EdgeInsets.fromLTRB(10, 0, 15, 0),
+                  child: CircleAvatar(
+                      child: ClipRRect(
+                          borderRadius: BorderRadius.circular(10.0),
+                          child: Image.asset("Assets/img/avatar.png"))),
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: const [
+                    Text(
+                      'Achref Talbi',
                       style: TextStyle(
-                          color: Colors.white, fontWeight: FontWeight.bold))
-                ],
-              ),
-            ],
+                          color: Colors.white, fontWeight: FontWeight.bold),
+                    ),
+                    Text('Admin',
+                        style: TextStyle(
+                            color: Colors.white, fontWeight: FontWeight.normal))
+                  ],
+                ),
+              ],
+            ),
           ),
           Column(
             children: drawerItems
@@ -76,11 +89,11 @@ class _DrawerScreenState extends State<DrawerScreen> {
                               size: 25,
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 20,
                           ),
                           Text(element['title'],
-                              style: TextStyle(
+                              style: const TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold,
                                   fontSize: 20))
@@ -91,17 +104,17 @@ class _DrawerScreenState extends State<DrawerScreen> {
           ),
           Row(
             children: [
-              SizedBox(
+              const SizedBox(
                 width: 10,
               ),
-              InkWell(
+              const InkWell(
                 child: Text(
                   'Dark Mode',
                   style: TextStyle(
                       color: Colors.white, fontWeight: FontWeight.bold),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 width: 10,
               ),
               Container(
@@ -109,7 +122,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
                 height: 20,
                 color: Colors.white,
               ),
-              SizedBox(
+              const SizedBox(
                 width: 10,
               ),
               Consumer<ThemeProvider>(builder: (context, provider, child) {

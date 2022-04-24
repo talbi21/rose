@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:finalrose/Service/urls.dart';
 import 'package:flutter/material.dart';
+import 'package:form_field_validator/form_field_validator.dart';
 import 'package:http/http.dart' as http;
 
 class AddDevice extends StatefulWidget {
@@ -41,6 +42,7 @@ class _AddDeviceState extends State<AddDevice> {
                     _name = value!;
                   });
                 },
+                validator: RequiredValidator(errorText: 'name is required'),
               ),
             ),
             Container(
@@ -75,19 +77,21 @@ class _AddDeviceState extends State<AddDevice> {
               child: ElevatedButton(
                 child: const Text("Add"),
                 onPressed: () {
-                  Map<String, String> headers = {
-                    "Content-Type": "application/json"
-                  };
+                  if (_keyForm.currentState!.validate()) {
+                    Map<String, String> headers = {
+                      "Content-Type": "application/json"
+                    };
 
-                  Map<String, String> body = {
-                    "name": _name!,
-                    "type": _type!,
-                  };
+                    Map<String, String> body = {
+                      "name": _name!,
+                      "type": _type!,
+                    };
 
-                  http
-                      .post(Uri.parse(URLS.baseUrl6000 + "/devices/one"),
-                          headers: headers, body: jsonEncode(body))
-                      .then((value) => {Navigator.pop(context)});
+                    http
+                        .post(Uri.parse(URLS.baseUrl6000 + "/devices/one"),
+                            headers: headers, body: jsonEncode(body))
+                        .then((value) => {Navigator.pop(context)});
+                  }
                 },
               ),
             ),

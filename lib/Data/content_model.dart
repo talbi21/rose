@@ -139,7 +139,7 @@ class mainDevicesModel {
 final List<mainDevicesModel> devicesA = [
   mainDevicesModel(
     name: "Lampe",
-    color: "purple",
+    color: "black",
     label: "Assets/img/smart-tv.png",
   ),
   mainDevicesModel(
@@ -149,22 +149,22 @@ final List<mainDevicesModel> devicesA = [
   ),
   mainDevicesModel(
     name: "Music",
-    color: "black22",
+    color: "black",
     label: "Assets/img/speaker.png",
   ),
   mainDevicesModel(
-    name: "Screen mirroring",
-    color: "black22",
+    name: "Screen mirror",
+    color: "black",
     label: "Assets/img/smart-tv.png",
   ),
   mainDevicesModel(
-    name: "Screen mirroring",
-    color: "black22",
+    name: "Screen mirror",
+    color: "black",
     label: "Assets/img/smart-tv.png",
   ),
   mainDevicesModel(
-    name: "Screen mirroring",
-    color: "black22",
+    name: "Screen mirror",
+    color: "black",
     label: "Assets/img/smart-tv.png",
   )
 ];

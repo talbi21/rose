@@ -1,10 +1,9 @@
+import 'package:finalrose/Data/static_models.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../Bloc/user/user_bloc.dart';
 import '../../Helpers/helpers.dart';
-import '../themes/colors_frave.dart';
-import '../widgets/shimmer_frave.dart';
 import '../widgets/widgets.dart';
 
 class InformationPage extends StatefulWidget {
@@ -18,8 +17,8 @@ class _InformationPageState extends State<InformationPage> {
   late TextEditingController _firstnameController;
   late TextEditingController _lastnameController;
   late TextEditingController _phoneController;
-  late TextEditingController _addressController;
-  late TextEditingController _referenceController;
+  late String _gender;
+  late TextEditingController _email;
   final _keyForm = GlobalKey<FormState>();
 
   @override
@@ -33,18 +32,26 @@ class _InformationPageState extends State<InformationPage> {
     _firstnameController.dispose();
     _lastnameController.dispose();
     _phoneController.dispose();
-    _addressController.dispose();
-    _referenceController.dispose();
+    _email.dispose();
     super.dispose();
   }
 
   void initData() {
-    final userBloc = BlocProvider.of<UserBloc>(context).state.user!;
+    //final userBloc = BlocProvider.of<UserBloc>(context).state.user!;
+
+    final userBloc = StaticUser(1, "jamelbd97@gmail.com", "123456", "Jamel",
+        "Bouassida", "22/08/1997", "Male", "pictureId", true, "Admin");
+    //final userBloc = StaticUser(0, "", "", "", "", "", "", "", true, "");
+
     _firstnameController = TextEditingController(text: userBloc.firstName);
     _lastnameController = TextEditingController(text: userBloc.lastName);
     _phoneController = TextEditingController(text: userBloc.birthdate);
-    _addressController = TextEditingController(text: userBloc.gender);
-    _referenceController = TextEditingController(text: userBloc.role);
+    if (userBloc.gender != "Male" || userBloc.gender != "Female") {
+      _gender = "Male";
+    } else {
+      _gender = userBloc.gender;
+    }
+    _email = TextEditingController(text: userBloc.email);
   }
 
   @override
@@ -63,59 +70,61 @@ class _InformationPageState extends State<InformationPage> {
         }
       },
       child: Scaffold(
-        backgroundColor: Colors.white,
         appBar: AppBar(
-          backgroundColor: Colors.white,
           elevation: 0,
-          title: const TextFrave(
+          title: TextFrave(
               text: 'My Profile',
-              color: Colors.black,
+              color: Theme.of(context).brightness == Brightness.light
+                  ? Colors.white
+                  : Colors.white,
               fontWeight: FontWeight.w500),
           centerTitle: true,
           leading: IconButton(
             splashRadius: 20,
             icon: const Icon(
               Icons.arrow_back_ios_rounded,
-              color: Colors.black,
             ),
             onPressed: () => Navigator.of(context).pop(),
           ),
-          actions: [
-            TextButton(
-                onPressed: () {
-                  userBloc.add(OnUpdateInformationUserEvent(
-                      _firstnameController.text.trim(),
-                      _lastnameController.text.trim(),
-                      _phoneController.text.trim(),
-                      _addressController.text.trim(),
-                      _referenceController.text.trim()));
-                },
-                child: const TextFrave(
-                  text: 'Save',
-                  color: ColorsFrave.primaryColorFrave,
-                  fontSize: 18,
-                ))
-          ],
+          actions: [],
         ),
         body: Form(
           key: _keyForm,
           child: ListView(
-            physics: BouncingScrollPhysics(),
+            physics: const BouncingScrollPhysics(),
             keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-            padding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
+            padding:
+                const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
             children: [
-              const TextFrave(text: 'Account data', fontSize: 18),
+              const SizedBox(height: 30.0),
+              SizedBox(
+                  width: 150,
+                  height: 150,
+                  child: CircleAvatar(
+                    child: ClipRRect(
+                        borderRadius: BorderRadius.circular(60.0),
+                        child: const Icon(
+                          Icons.person,
+                          size: 120,
+                        )),
+                  )),
+              const SizedBox(height: 30.0),
+              /*TextFrave(
+                  text: 'Account data',
+                  fontSize: 18,
+                  color: Theme.of(context).brightness == Brightness.light
+                      ? Colors.white
+                      : Colors.white),
               const SizedBox(height: 10.0),
               BlocBuilder<UserBloc, UserState>(
                   buildWhen: (previous, current) => previous != current,
                   builder: (context, state) => state.user != null
                       ? Container(
-                          padding: EdgeInsets.symmetric(
+                          padding: const EdgeInsets.symmetric(
                               horizontal: 20, vertical: 10),
                           height: 80,
                           width: MediaQuery.of(context).size.width,
                           decoration: BoxDecoration(
-                              color: Color(0xff4C98EE).withOpacity(.1),
                               borderRadius: BorderRadius.circular(10.0)),
                           child: Column(
                             children: [
@@ -148,20 +157,38 @@ class _InformationPageState extends State<InformationPage> {
                             ],
                           ),
                         )
-                      : const ShimmerFrave()),
-              const SizedBox(height: 30.0),
-              const TextFrave(text: 'Personal Information', fontSize: 18),
-              const SizedBox(height: 10.0),
+                      : const ShimmerFrave()),*/
+              Center(
+                child: TextFrave(
+                    text: 'Personal Information',
+                    fontSize: 18,
+                    color: Theme.of(context).brightness == Brightness.light
+                        ? Colors.black
+                        : Colors.white),
+              ),
+              const SizedBox(height: 25.0),
               TextFormFrave(
                 controller: _firstnameController,
                 hintText: 'Enter your First Name',
                 prefixIcon: const Icon(Icons.person_outline_rounded),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'This field cannot be empty';
+                  }
+                  return null;
+                },
               ),
               const SizedBox(height: 20.0),
               TextFormFrave(
                 controller: _lastnameController,
                 hintText: 'Enter Last Name',
                 prefixIcon: const Icon(Icons.person_outline_rounded),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'This field cannot be empty';
+                  }
+                  return null;
+                },
               ),
               const SizedBox(height: 20.0),
               TextFormFrave(
@@ -169,21 +196,92 @@ class _InformationPageState extends State<InformationPage> {
                 hintText: 'Enter your Phone Number',
                 prefixIcon: const Icon(Icons.phone_android_rounded),
                 keyboardType: TextInputType.phone,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'This field cannot be empty';
+                  }
+                  return null;
+                },
+              ),
+              const SizedBox(height: 20.0),
+              Container(
+                padding: const EdgeInsets.only(left: 10, right: 20),
+                decoration: ShapeDecoration(
+                  color: Theme.of(context).brightness == Brightness.light
+                      ? Colors.white
+                      : Colors.black26,
+                  shape: const RoundedRectangleBorder(
+                    side: BorderSide(
+                        width: 1.0,
+                        style: BorderStyle.solid,
+                        color: Color.fromARGB(70, 0, 0, 0)),
+                    borderRadius: BorderRadius.all(Radius.circular(30.0)),
+                  ),
+                ),
+                child: DropdownButtonHideUnderline(
+                  child: DropdownButton<String>(
+                    value: _gender,
+                    icon: const Icon(Icons.keyboard_arrow_down),
+                    elevation: 16,
+                    underline: Container(
+                      height: 2,
+                    ),
+                    onChanged: (String? newValue) {
+                      setState(() {
+                        _gender = newValue!;
+                      });
+                    },
+                    items: <String>['Male', 'Female']
+                        .map<DropdownMenuItem<String>>((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Row(
+                          children: [
+                            value == "Male"
+                                ? const Icon(Icons.male)
+                                : const Icon(Icons.female),
+                            const SizedBox(width: 12.0),
+                            Text(value),
+                          ],
+                        ),
+                      );
+                    }).toList(),
+                  ),
+                ),
               ),
               const SizedBox(height: 20.0),
               TextFormFrave(
-                controller: _addressController,
-                hintText: 'Street Address',
+                controller: _email,
+                hintText: 'Enter your email',
                 prefixIcon: const Icon(Icons.home_outlined),
-                keyboardType: TextInputType.streetAddress,
+                keyboardType: TextInputType.emailAddress,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'This field cannot be empty';
+                  }
+                  return null;
+                },
               ),
               const SizedBox(height: 20.0),
-              TextFormFrave(
-                controller: _referenceController,
-                hintText: 'Reference',
-                prefixIcon: const Icon(Icons.home_outlined),
-                keyboardType: TextInputType.streetAddress,
-              ),
+              ElevatedButton(
+                onPressed: () => {
+                  if (_keyForm.currentState!.validate())
+                    {
+                      // If the form is valid, display a snackbar. In the real world,
+                      // you'd often call a server or save the information in a database.
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text('Processing Data')),
+                      )
+                    }
+                },
+                child: const Text("Save"),
+                style: ElevatedButton.styleFrom(
+                  elevation: 5,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30.0),
+                  ),
+                ),
+              )
             ],
           ),
         ),

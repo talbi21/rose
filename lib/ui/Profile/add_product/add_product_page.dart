@@ -73,13 +73,14 @@ class _AddProductPageState extends State<AddProductPage> {
       child: Container(
         decoration: BoxDecoration(
           gradient: RadialGradient(
-              radius: 0.4,
+
+              radius: 0.8,
               colors: Theme.of(context).brightness == Brightness.light
-                  ? [Colors.white, Colors.blueAccent]
+                  ? [Colors.white, Colors.white]
                   : [
-                      const Color(0xE6600D51).withOpacity(1),
-                      const Color(0xFF121212),
-                    ],
+                const Color(0xE6600D51).withOpacity(1),
+                const Color(0xFF121212),
+              ],
               tileMode: TileMode.clamp),
         ),
         child: Scaffold(
@@ -94,7 +95,7 @@ class _AddProductPageState extends State<AddProductPage> {
               fontSize: 20,
               fontWeight: FontWeight.bold,
               color: Theme.of(context).brightness == Brightness.light
-                  ? Colors.black
+                  ? Colors.white
                   : Colors.white,
             ),
             centerTitle: true,
@@ -103,39 +104,23 @@ class _AddProductPageState extends State<AddProductPage> {
               onPressed: () => Navigator.pop(context),
               icon: Icon(Icons.arrow_back_ios_new_rounded,
                   color: Theme.of(context).brightness == Brightness.light
-                      ? Colors.black
+                      ? Colors.white
                       : Colors.white),
             ),
             actions: [
               TextButton(
-                  /*
                   onPressed: () {
-                    if(_keyForm.currentState!.validate()){
-
-                      roomBloc.add( OnSaveNewRoomEvent(
-                          _nameProductController.text.trim(),
-                          _descriptionProductController.text.trim(),
-                          _stockController.text.trim(),
-                          _priceController.text.trim(),
-
-
-                      ));
-
+                    if (_keyForm.currentState!.validate()) {
+                      modalSuccess(context, 'Room Added!', onPressed: () {
+                        Navigator.pushAndRemoveUntil(context,
+                            routeSlide(page: HomePage()), (_) => false);
+                      });
                     }
-                  },
-
-                 */
-
-                  onPressed: () {
-                    modalSuccess(context, 'Room Added!', onPressed: () {
-                      Navigator.pushAndRemoveUntil(
-                          context, routeSlide(page: HomePage()), (_) => false);
-                    });
                   },
                   child: TextFrave(
                     text: 'Save',
                     color: Theme.of(context).brightness == Brightness.light
-                        ? Colors.black
+                        ? Colors.white
                         : Colors.white,
                     fontWeight: FontWeight.w500,
                   ))
@@ -169,7 +154,8 @@ class _AddProductPageState extends State<AddProductPage> {
                         ? Colors.white70
                         : Color(0xFF2A2B2E),
                     //background color of dropdown button
-                    border: Border.all(color: Color(0xFF2A2B2E)),
+                    border:
+                        Border.all(color: const Color.fromARGB(70, 0, 0, 0)),
                     //border of dropdown button
                     borderRadius: BorderRadius.circular(
                         50), //border raiuds of dropdown button
@@ -231,7 +217,7 @@ class _AddProductPageState extends State<AddProductPage> {
                         : Color(0xFF2A2B2E),
                     borderRadius: BorderRadius.all(Radius.circular(40)),
                     border: Border.all(
-                      color: Color(0xFF2A2B2E),
+                      color: const Color.fromARGB(70, 0, 0, 0),
                     ),
                   ),
                   buttonIcon: Icon(
