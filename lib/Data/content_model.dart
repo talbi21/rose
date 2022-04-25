@@ -197,6 +197,5 @@ List<Map> drawerItems = [
     'screen': CameraScreen()
   },
   {'icon': Icons.settings, 'title': 'Settings', 'screen': ProfilePage()},
-  {'icon': Icons.person, 'title': 'Add Guest', 'screen': QRViewExample()},
   {'icon': Icons.home, 'title': 'Add Home', 'screen': GenerateQR()},
 ];

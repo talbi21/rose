@@ -1,5 +1,6 @@
 import 'package:finalrose/Helpers/helpers.dart';
 import 'package:finalrose/ui/Home/home_page.dart';
+import 'package:finalrose/ui/Qr%20code/scanQr.dart';
 import 'package:flutter/material.dart';
 
 import '../widgets/widgets.dart';
@@ -123,6 +124,19 @@ class StartHomePage extends StatelessWidget {
                                   Navigator.of(context).pushNamed('signInPage'),
                             ),
                           ],
+                        ),
+                        TextButton(
+                          child: TextFrave(
+                            text: 'Login as guest',
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color:
+                                Theme.of(context).brightness == Brightness.light
+                                    ? Color.fromRGBO(10, 55, 125, 1.0)
+                                    : Color(0xff0c6cf2),
+                          ),
+                          onPressed: () => Navigator.push(
+                              context, routeSlide(page: QRViewExample())),
                         ),
                         TextButton(
                           child: TextFrave(
