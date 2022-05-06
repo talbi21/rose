@@ -2,17 +2,17 @@ class RoomCart {
   final String uidRoom;
 
   final String name;
-  double price;
-  int amount;
+  String houseID;
+
 
   RoomCart({
     required this.uidRoom,
     required this.name,
-    required this.price,
-    required this.amount,
+   required this.houseID,
+
   });
 
   Map<String, dynamic> toJson() {
-    return {'uidRoom': uidRoom, 'price': price, 'amount': amount};
+    return {'uidRoom': uidRoom, 'houseId': houseID,'name':name};
   }
 }

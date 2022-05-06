@@ -1,3 +1,4 @@
+import 'package:finalrose/Bloc/Home/home_bloc.dart';
 import 'package:finalrose/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -30,6 +31,7 @@ class MyApp extends StatelessWidget {
           BlocProvider(create: (context) => UserBloc()),
           BlocProvider(create: (context) => GeneralBloc()),
           BlocProvider(create: (context) => RoomBloc()),
+          BlocProvider(create: (context) => HomeBloc()),
         ],
         child: MaterialApp(
           debugShowCheckedModeBanner: false,

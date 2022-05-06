@@ -11,6 +11,7 @@ class RoomBloc extends Bloc<RoomEvent, RoomState> {
 
   RoomBloc() : super(RoomInitial()) {
     on<OnAddOrDeleteRoomFavoriteEvent>(_addOrDeleteRoomFavorite);
+    /*
     on<OnAddRoomToCartEvent>(_addRoomToCart);
     on<OnDeleteRoomToCartEvent>(_deleteRoomCart);
     on<OnPlusQuantityRoomEvent>(_plusQuantityRoom);
@@ -19,10 +20,14 @@ class RoomBloc extends Bloc<RoomEvent, RoomState> {
     on<OnSaveRoomsBuyToDatabaseEvent>(_saveRoomToDatabase);
     on<OnSelectPathImageRoomEvent>(_selectImageForRoom);
     on<OnSaveNewRoomEvent>(_addNewRoom);
+
+     */
   }
 
   Future<void> _addOrDeleteRoomFavorite(
       OnAddOrDeleteRoomFavoriteEvent event, Emitter<RoomState> emit) async {
+  }
+  }
 /*
     try {
 
@@ -42,8 +47,7 @@ class RoomBloc extends Bloc<RoomEvent, RoomState> {
 
 
  */
-  }
-
+/*
   Future<void> _addRoomToCart(
       OnAddRoomToCartEvent event, Emitter<RoomState> emit) async {
     final hasRoom = room.contains(event.room);
@@ -145,3 +149,5 @@ class RoomBloc extends Bloc<RoomEvent, RoomState> {
  */
   }
 }
+
+ */

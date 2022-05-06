@@ -14,12 +14,12 @@ class ResponseUser {
 
   bool resp;
   String message;
-  User user;
+  famillyMember user;
 
   factory ResponseUser.fromJson(Map<String, dynamic> json) => ResponseUser(
         resp: json["resp"],
         message: json["message"],
-        user: User.fromJson(json["user"]),
+        user: famillyMember.fromJson(json["famillyMember"]),
       );
 
   Map<String, dynamic> toJson() => {
@@ -29,8 +29,8 @@ class ResponseUser {
       };
 }
 
-class User {
-  User({
+class famillyMember {
+  famillyMember({
     required this.uid,
     required this.email,
     required this.password,
@@ -54,7 +54,7 @@ class User {
   bool isVerified;
   String role;
 
-  factory User.fromJson(Map<String, dynamic> json) => User(
+  factory famillyMember.fromJson(Map<String, dynamic> json) => famillyMember(
         uid: json["uid"] ?? 0,
         email: json["email"] ?? "",
         password: json["password"] ?? "",

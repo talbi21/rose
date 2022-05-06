@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:finalrose/Bloc/Home/home_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -17,7 +18,14 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  String dropdownValue = 'HOME1';
+  final list =<String>[]
+      .map<DropdownMenuItem<String>>((String value) {
+    return DropdownMenuItem<String>(
+      value: value,
+      child: Text(value),
+    );
+  }).toList();
+  String dropdownValue = 'One';
 
   late ScrollController _scrollControllerHome;
   double scrollPrevious = 0;
@@ -137,7 +145,10 @@ class _HomeScreenState extends State<HomeScreen> {
          */
       ),
       drawer: DrawerScreen(),
-      body: Stack(children: [
+      body: BlocListener<HomeBloc, HomeState>(
+  listener: (context, state) {
+  },
+  child: Stack(children: [
         Container(
           decoration: BoxDecoration(
               color: Theme.of(context).brightness == Brightness.light
@@ -153,8 +164,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   children: [
                     DropdownButton<String>(
                       value: dropdownValue,
-                      items: [
-                        //Light, dark, and system
+                      items: /*[
+
                         DropdownMenuItem<String>(
                           value: 'HOME1',
                           child: Text(
@@ -195,7 +206,15 @@ class _HomeScreenState extends State<HomeScreen> {
                                     : Colors.white),
                           ),
                         ),
-                      ],
+                      ]*/
+
+                      <String>['One', 'Two', 'Free', 'Four']
+                        .map<DropdownMenuItem<String>>((String value) {
+              return DropdownMenuItem<String>(
+              value: value,
+              child: Text(value),
+              );
+              }).toList(),
                       onChanged: (String? value) {
                         setState(() {
                           dropdownValue = value!;
@@ -245,6 +264,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
       ]),
+),
     );
   }
 

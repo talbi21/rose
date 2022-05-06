@@ -1,28 +1,36 @@
 import 'package:animations/animations.dart';
+import 'package:finalrose/ui/Login/loading_page.dart';
 import 'package:finalrose/ui/Profile/shopping/shopping_page.dart';
 import 'package:finalrose/ui/Profile/widgets/card_item_profile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../Bloc/Auth/auth_bloc.dart';
 import '../../Bloc/General/general_bloc.dart';
 import '../../Bloc/user/user_bloc.dart';
 import '../../Helpers/helpers.dart';
+import '../Home/home_page.dart';
+import '../Start/start_home_page.dart';
 import '../widgets/widgets.dart';
 
 class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+
     final size = MediaQuery.of(context).size;
 
-    return BlocListener<UserBloc, UserState>(
+    return BlocListener<AuthBloc, AuthState>(
       listener: (context, state) {
-        if (state is LoadingUserState) {
-          modalLoading(context, 'Loading...');
-        } else if (state is FailureUserState) {
+        if (state is LoadingAuthState) {
+          modalLoading(context, 'Checking...');
+        } else if (state is FailureAuthState) {
           Navigator.pop(context);
-          errorMessageSnack(context, state.error);
-        } else if (state is SetUserState) {
+          errorMessageSnack(context, "check your information");
+          print(state.error);
+        } else if (state is SuccessAuthState) {
           Navigator.pop(context);
+          // userBloc.add(OnGetUserEvent());
+          Navigator.pushAndRemoveUntil(context, routeSlide(page: HomePage()), (_) => false);
         }
       },
       child: Scaffold(
@@ -91,6 +99,7 @@ class _ListProfileState extends State<ListProfile> {
 
   @override
   Widget build(BuildContext context) {
+    final authBloc = BlocProvider.of<AuthBloc>(context);
     final size = MediaQuery.of(context).size;
 
     return ListView(
@@ -245,7 +254,11 @@ class _ListProfileState extends State<ListProfile> {
           borderRadius: BorderRadius.circular(50.0),
           icon: Icons.power_settings_new_sharp,
           backgroundColor: Colors.red,
-          onPressed: () {},
+          onPressed: () {
+
+            authBloc..add(LogOutEvent());
+            Navigator.pushAndRemoveUntil(context, routeSlide(page: LoadingPage()), (_) => false);
+          },
         ),
       ],
     );

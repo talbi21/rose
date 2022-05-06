@@ -10,19 +10,18 @@ import '../Models/Response/response_user.dart';
 class UserServices {
   Future<ResponseDefault> addNewUser(
       String username, String email, String password) async {
-    final resp = await http.post(Uri.parse('${URLS.baseUrl}/user/add-new-user'),
+    final resp = await http.post(Uri.parse('${URLS.baseUrl}/register'),
         headers: {'Accept': 'application/json'},
-        body: {'username': username, 'email': email, 'passwordd': password});
+        body: {'firstname': username, 'email': email, 'password': password});
 
     return ResponseDefault.fromJson(jsonDecode(resp.body));
   }
 
-  Future<User> getUserById() async {
-    final token = await secureStorage.readToken();
+  Future<famillyMember> getUserById( {required String? email}) async {
+    final resp = await http.post(Uri.parse('${URLS.baseUrl}/find'),
+        headers: {'Accept': 'application/json'},
+        body: {'email': email});
 
-    final resp = await http.get(
-        Uri.parse('${URLS.baseUrl}/user/get-user-by-id'),
-        headers: {'Accept': 'application/json', 'xxx-token': token!});
 
     return ResponseUser.fromJson(jsonDecode(resp.body)).user;
   }

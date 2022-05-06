@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../Models/Response/response_user.dart';
 import '../../Service/user_services.dart';
@@ -11,22 +12,29 @@ class UserBloc extends Bloc<UserEvent, UserState> {
   UserBloc() : super(UserInitial()) {
     on<OnAddNewUser>(_addNewUser);
     on<OnGetUserEvent>(_getUser);
-    on<OnUpdateProfilePictureEvent>(_updatePictureProfile);
-    on<OnUpdateInformationUserEvent>(_updateInformationUser);
-    on<OnUpdateStreetAdressEvent>(_updateStreetAddress);
+  //  on<OnUpdateProfilePictureEvent>(_updatePictureProfile);
+  //  on<OnUpdateInformationUserEvent>(_updateInformationUser);
+  //  on<OnUpdateStreetAdressEvent>(_updateStreetAddress);
   }
 
   Future<void> _getUser(OnGetUserEvent event, Emitter<UserState> emit) async {
-    final user = await userServices.getUserById();
+    final prefs = await SharedPreferences.getInstance();
+    final String? usermail = prefs.getString('email');
+    print("here2"+usermail!);
+    final user = await userServices.getUserById( email: usermail);
     emit(SetUserState(user: user));
   }
 
   Future<void> _addNewUser(OnAddNewUser event, Emitter<UserState> emit) async {
     try {
+      print(event.username);
+      print(event.email);
+      print(event.password);
       emit(LoadingUserState());
 
       final data = await userServices.addNewUser(
           event.username, event.email, event.password);
+
 
       if (data.resp) {
         emit(SuccessUserState());
@@ -34,10 +42,11 @@ class UserBloc extends Bloc<UserEvent, UserState> {
         emit(FailureUserState(data.message));
       }
     } catch (e) {
+      print(e);
       emit(FailureUserState(e.toString()));
     }
   }
-
+/*
   Future<void> _updatePictureProfile(
       OnUpdateProfilePictureEvent event, Emitter<UserState> emit) async {
     try {
@@ -55,6 +64,8 @@ class UserBloc extends Bloc<UserEvent, UserState> {
       emit(FailureUserState(e.toString()));
     }
   }
+
+
 
   Future<void> _updateInformationUser(
       OnUpdateInformationUserEvent event, Emitter<UserState> emit) async {
@@ -84,7 +95,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
           await userServices.updateStreetAddress(event.street, event.reference);
 
       if (data.resp) {
-        final user = await userServices.getUserById();
+        final user = await userServices.getUserById( email: usermail);
         emit(SetUserState(user: user));
       } else {
         emit(FailureUserState(data.message));
@@ -92,5 +103,11 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     } catch (e) {
       emit(FailureUserState(e.toString()));
     }
+
+
   }
+
+ */
+
+
 }

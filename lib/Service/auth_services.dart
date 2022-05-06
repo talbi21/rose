@@ -9,21 +9,33 @@ import '../Models/Response/response_auth.dart';
 class AuthServices {
   Future<ResponseAuth> login(
       {required String email, required String password}) async {
-    final resp = await http.post(Uri.parse('${URLS.baseUrl}/auth/login'),
+    final resp = await http.post(Uri.parse('${URLS.baseUrl}/login'),
         headers: {'Accept': 'application/json'},
-        body: {'email': email, 'passwordd': password});
+        body: {'email': email, 'password': password});
 
     return ResponseAuth.fromJson(jsonDecode(resp.body));
   }
 
-  Future<ResponseAuth> renewToken() async {
+  Future<ResponseAuth> renewToken( {required String? email}) async {
+    final resp = await http.post(Uri.parse('${URLS.baseUrl}/renew-login'),
+        headers: {'Accept': 'application/json'},
+        body: {'email': email});
+
+    return ResponseAuth.fromJson(jsonDecode(resp.body));
+  }
+/*
+  Future<ResponseAuth> renewToken2() async {
     final token = await secureStorage.readToken();
 
-    final resp = await http.get(Uri.parse('${URLS.baseUrl}/auth/renew-login'),
-        headers: {'Accept': 'application/json', 'xxx-token': token!});
-
+    final resp = await http.get(Uri.parse('${URLS.baseUrl}/renew-login'),
+        headers: {'Accept': 'application/json'},
+        body: {'email': email, 'password': password});
     return ResponseAuth.fromJson(jsonDecode(resp.body));
   }
+
+ */
+
+
 }
 
 final authServices = AuthServices();

@@ -17,14 +17,14 @@ class ResponseAuth {
   String token;
 
   factory ResponseAuth.fromJson(Map<String, dynamic> json) => ResponseAuth(
-        resp: json["resp"],
-        message: json["message"],
-        token: json["token"],
+    resp: json["resp"],
+    message: json["message"],
+    token: json["token"],
       );
 
   Map<String, dynamic> toJson() => {
-        "resp": resp,
-        "message": message,
-        "token": token,
+    "resp": resp,
+    "message": message,
+    "token": token,
       };
 }

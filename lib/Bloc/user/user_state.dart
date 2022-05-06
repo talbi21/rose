@@ -2,7 +2,7 @@ part of 'user_bloc.dart';
 
 @immutable
 abstract class UserState {
-  final User? user;
+  final famillyMember? user;
 
   UserState({
     this.user,
@@ -12,7 +12,7 @@ abstract class UserState {
 class UserInitial extends UserState {}
 
 class SetUserState extends UserState {
-  final User user;
+  final famillyMember user;
 
   SetUserState({required this.user}) : super(user: user);
 }

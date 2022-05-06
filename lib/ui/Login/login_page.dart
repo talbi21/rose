@@ -52,12 +52,12 @@ class _SignInPageState extends State<SignInPage> {
           modalLoading(context, 'Checking...');
         } else if (state is FailureAuthState) {
           Navigator.pop(context);
-          errorMessageSnack(context, state.error);
+          errorMessageSnack(context, "check your information");
+          print(state.error);
         } else if (state is SuccessAuthState) {
           Navigator.pop(context);
-          // userBloc.add(OnGetUserEvent());
-          Navigator.pushAndRemoveUntil(
-              context, routeSlide(page: HomePage()), (_) => false);
+         // userBloc.add(OnGetUserEvent());
+         Navigator.pushAndRemoveUntil(context, routeSlide(page: HomePage()), (_) => false);
         }
       },
       child: Container(
@@ -194,8 +194,9 @@ class _SignInPageState extends State<SignInPage> {
                       ),
                       onPressed: () {
                         if (_keyForm.currentState!.validate()) {
-                          //   authBloc.add(LoginEvent(_emailController.text.trim(), _passowrdController.text.trim()));
-                          authBloc.emit(SuccessAuthState());
+                             authBloc.add(LoginEvent(_emailController.text.trim(), _passowrdController.text.trim()));
+                      //      print(_emailController.text+"  "+ _passowrdController.text);
+                        //  authBloc.emit(SuccessAuthState());
                         }
                       },
                     ),
